@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyToPlantas extends Migration
+class CreatePlantasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,15 @@ class AddForeignKeyToPlantas extends Migration
      */
     public function up()
     {
-        Schema::table('plantas', function (Blueprint $table) {
+        Schema::create('plantas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('area_id')->nullable();
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->string('plantaName',50);
+            $table->string('description',150);
+            $table->integer('maxDiesel');
+            $table->string('dataTableName',30);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +32,6 @@ class AddForeignKeyToPlantas extends Migration
      */
     public function down()
     {
-        Schema::table('plantas', function (Blueprint $table) {
-            //$table->dropColumn('idArea');
-        });
+        Schema::dropIfExists('plantas');
     }
 }

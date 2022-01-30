@@ -8,6 +8,7 @@
 @endsection
 @section('content')
 <div id="padd" class="container-fluid">
+    <input type="hidden" id="lastValueVolt">
     <div class="row">
 
 

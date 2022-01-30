@@ -66,24 +66,39 @@ const myChart1 = new Chart(ctx1, {
 });
 
 function getData() {
-    $.get("http://localhost:8080/LaravelTest/Graficas/public/api/data/1/", function (data) {
-        console.log(data);
-        Object.values(data).forEach(values => {
-            myChart.data.labels.push("13:20");
+    $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/r0001", function (data) {
+        Object.values(data).reverse().forEach(values => {
+            myChart.data.labels.push(values.time.substring(10));
             myChart.data.datasets[0].data.push(values.voltsValue);
-            console.log(values);
+            $("#lastValueVolt").val(values.time.substring(10))
         });
         myChart.update();
     });
 }
 
+function getLastData() {
+    $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001", function (data) {
+        Object.values(data).forEach(values => {
+            if ($("input#lastValueVolt").val() != values.time.substring(10)) {
+                myChart.data.labels.splice(0, 1);
+                myChart.data.datasets[0].data.splice(0, 1);
+                myChart.data.labels.push(values.time.substring(10));
+                myChart.data.datasets[0].data.push(values.voltsValue);
+                $("#lastValueVolt").val(values.time.substring(10))
+            }
+            console.log($("input#lastValueVolt").val());
+
+        });
+        myChart.update();
+    });
+}
 
 function addData() {
-    var _random1 = Math.random() * (24 - 27) + 24;
-    myChart1.data.labels.splice(0, 1);
-    myChart1.data.datasets[0].data.splice(0, 1);
-    myChart1.data.labels.push("13:20");
-    myChart1.data.datasets[0].data.push(_random1);
-    myChart1.update();
+    // var _random1 = Math.random() * (24 - 27) + 24;
+    // myChart1.data.labels.splice(0, 1);
+    // myChart1.data.datasets[0].data.splice(0, 1);
+    // myChart1.data.labels.push("13:20");
+    // myChart1.data.datasets[0].data.push(_random1);
+    // myChart1.update();
 }
-setInterval('addData()', 4000);
+setInterval('getLastData()', 4000);

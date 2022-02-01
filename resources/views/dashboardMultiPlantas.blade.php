@@ -99,6 +99,24 @@
             <canvas id="myChart1" height="110hv"></canvas>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="btn">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></i></button>
+                    <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
+                </div>
+            </div>
+            <canvas id="myChart3" height="110hv"></canvas>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></button>
+                <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
+            </div>
+            <canvas id="myChart4" height="110hv"></canvas>
+        </div>
+    </div>
 </div>
 @endsection
 @section('js')

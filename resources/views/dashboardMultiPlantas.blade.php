@@ -107,14 +107,14 @@
                     <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
                 </div>
             </div>
-            <canvas id="myChart3" height="110hv"></canvas>
+            <canvas id="myChart2" height="110hv"></canvas>
         </div>
         <div class="col-md-6">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></button>
                 <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
             </div>
-            <canvas id="myChart4" height="110hv"></canvas>
+            <canvas id="myChart3" height="110hv"></canvas>
         </div>
     </div>
 </div>

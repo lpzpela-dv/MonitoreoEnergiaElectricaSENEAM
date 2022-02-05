@@ -1,65 +1,47 @@
 $(document).ready(function () {
     //Crear Graficas
     getData();
+
 });
 
-const ctx = document.getElementById('myChart');
-const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        datasets: [{
-            label: 'Volts',
-            borderWidth: 3,
-            fill: false,
-            borderColor: '#149481',
-            tension: 0.2
-        }]
-    },
-    options: {
-        scales: {
-            y: {
 
-                grace: 2
-            }
+const myChart = setupNewGraph('myChart','line','Volts','Variación de voltaje');
+const myChart1 = setupNewGraph('myChart1','bar','Amp','Variación de Amperaje');
+//const myChart2 = setupNewGraph('myChart2','line','Amp','Variación de Amperaje');
+//const myChart3 = setupNewGraph('myChart3','bar','Amp','Variación de Amperaje');
+
+function setupNewGraph(ctx, GType, GLabel, GText) {
+    const _ctx = document.getElementById(ctx);
+    const config = {
+        type: GType,
+        data: {
+            datasets: [{
+                label: GLabel,
+                borderWidth: 3,
+                fill: false,
+                borderColor: '#149481',
+                tension: 0.2
+            }]
         },
-        plugins: {
-            title: {
-                display: true,
-                text: 'Variación de Amperaje',
-                color: "#7C110C"
+        options: {
+            scales: {
+                y: {
+
+                    grace: 2
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: GText,
+                    color: "#7C110C"
+                }
             }
         }
     }
-});
-
-const ctx1 = document.getElementById('myChart1').getContext('2d');
-const myChart1 = new Chart(ctx1, {
-    type: 'line',
-    data: {
-        datasets: [{
-            label: 'AMP',
-            borderWidth: 3,
-            fill: false,
-            borderColor: '#149481',
-            tension: 0.2
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-
-                grace: 2
-            }
-        },
-        plugins: {
-            title: {
-                display: true,
-                text: 'Variación de Amperaje',
-                color: "#7C110C"
-            }
-        }
-    }
-});
+    const myChart = new Chart(_ctx, config);
+    return myChart;
+}
 
 function getData() {
     $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/r0001", function (data) {
@@ -67,16 +49,23 @@ function getData() {
             // Graficando valores de volts
             myChart.data.labels.push(values.time.substring(10));
             myChart.data.datasets[0].data.push(values.voltsValue);
-            myChart.type = "bar";
             $("#lastValueVolt").val(values.time.substring(10))
             // Graficando valores de Amp
             myChart1.data.labels.push(values.time.substring(10));
             myChart1.data.datasets[0].data.push(values.ampValue);
+
+            // myChart2.data.labels.push(values.time.substring(10));
+            // myChart2.data.datasets[0].data.push(values.ampValue);
+
+            // myChart3.data.labels.push(values.time.substring(10));
+            // myChart3.data.datasets[0].data.push(values.ampValue);
             $('#LastVoltvalue').html(values.voltsValue + "V");
             $('#LastAmpvalue').html(values.ampValue + "Amp");
         });
         myChart.update();
         myChart1.update();
+        myChart2.update();
+        myChart3.update();
     });
 }
 
@@ -105,12 +94,4 @@ function getLastData() {
     });
 }
 
-function addData() {
-    // var _random1 = Math.random() * (24 - 27) + 24;
-    // myChart1.data.labels.splice(0, 1);
-    // myChart1.data.datasets[0].data.splice(0, 1);
-    // myChart1.data.labels.push("13:20");
-    // myChart1.data.datasets[0].data.push(_random1);
-    // myChart1.update();
-}
 setInterval('getLastData()', 4000);

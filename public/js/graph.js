@@ -5,8 +5,8 @@ $(document).ready(function () {
 });
 
 
-const myChart = setupNewGraph('myChart','line','Volts','Variación de voltaje');
-const myChart1 = setupNewGraph('myChart1','bar','Amp','Variación de Amperaje');
+const myChart = setupNewGraph('myChart', 'line', 'Volts', 'Variación de voltaje');
+const myChart1 = setupNewGraph('myChart1', 'line', 'Amp', 'Variación de Amperaje');
 //const myChart2 = setupNewGraph('myChart2','line','Amp','Variación de Amperaje');
 //const myChart3 = setupNewGraph('myChart3','bar','Amp','Variación de Amperaje');
 
@@ -64,34 +64,58 @@ function getData() {
         });
         myChart.update();
         myChart1.update();
-        myChart2.update();
-        myChart3.update();
+        // myChart2.update();
+        // myChart3.update();
     });
 }
 
-function getLastData() {
-    $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001", function (data) {
-        Object.values(data).forEach(values => {
-            if ($("input#lastValueVolt").val() != values.time.substring(10)) {
-                myChart.data.labels.splice(0, 1);
-                myChart.data.datasets[0].data.splice(0, 1);
-                myChart.data.labels.push(values.time.substring(10));
-                myChart.data.datasets[0].data.push(values.voltsValue);
-                // Valores de Amp
-                myChart1.data.labels.splice(0, 1);
-                myChart1.data.datasets[0].data.splice(0, 1);
-                myChart1.data.labels.push(values.time.substring(10));
-                myChart1.data.datasets[0].data.push(values.ampValue);
-                $("#lastValueVolt").val(values.time.substring(10));
-                $('#LastVoltvalue').html(values.voltsValue + "V");
-                $('#LastAmpvalue').html(values.ampValue + "Amp");
-            }
-            console.log($("input#lastValueVolt").val());
+// function getLastData() {
+//     $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001", function (data) {
+//         Object.values(data).forEach(values => {
+//             if ($("input#lastValueVolt").val() != values.time.substring(10)) {
+//                 myChart.data.labels.splice(0, 1);
+//                 myChart.data.datasets[0].data.splice(0, 1);
+//                 myChart.data.labels.push(values.time.substring(10));
+//                 myChart.data.datasets[0].data.push(values.voltsValue);
+//                 // Valores de Amp
+//                 myChart1.data.labels.splice(0, 1);
+//                 myChart1.data.datasets[0].data.splice(0, 1);
+//                 myChart1.data.labels.push(values.time.substring(10));
+//                 myChart1.data.datasets[0].data.push(values.ampValue);
+//                 $("#lastValueVolt").val(values.time.substring(10));
+//                 $('#LastVoltvalue').html(values.voltsValue + "V");
+//                 $('#LastAmpvalue').html(values.ampValue + "Amp");
+//             }
+//             console.log($("input#lastValueVolt").val());
 
-        });
-        myChart.update();
-        myChart1.update();
-    });
-}
+//         });
+//         myChart.update();
+//         myChart1.update();
+//     });
+// }
 
-setInterval('getLastData()', 4000);
+// setInterval('getLastData()', 4000);
+
+setInterval(async () => {
+    const res = await fetch('http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001').then(response => response.json());
+
+    if ($("input#lastValueVolt").val() != res[0].time.substring(10)) {
+        console.log('dentro');
+        myChart.data.labels.splice(0, 1);
+        myChart.data.datasets[0].data.splice(0, 1);
+        myChart.data.labels.push(res[0].time.substring(10));
+        myChart.data.datasets[0].data.push(res[0].voltsValue);
+        // Valores de Amp
+        myChart1.data.labels.splice(0, 1);
+        myChart1.data.datasets[0].data.splice(0, 1);
+        myChart1.data.labels.push(res[0].time.substring(10));
+        myChart1.data.datasets[0].data.push(res[0].ampValue);
+        $("#lastValueVolt").val(res[0].time.substring(10));
+        $('#LastVoltvalue').html(res[0].voltsValue + "V");
+        $('#LastAmpvalue').html(res[0].ampValue + "Amp");
+    }
+    myChart.update();
+    myChart1.update();
+    console.log($("input#lastValueVolt").val());
+    console.log(res[0].time.substring(10));
+}, 4000);

@@ -7,8 +7,6 @@ $(document).ready(function () {
 
 const myChart = setupNewGraph('myChart', 'line', 'Volts', 'Variación de voltaje');
 const myChart1 = setupNewGraph('myChart1', 'line', 'Amp', 'Variación de Amperaje');
-//const myChart2 = setupNewGraph('myChart2','line','Amp','Variación de Amperaje');
-//const myChart3 = setupNewGraph('myChart3','bar','Amp','Variación de Amperaje');
 
 function setupNewGraph(ctx, GType, GLabel, GText) {
     const _ctx = document.getElementById(ctx);
@@ -39,8 +37,8 @@ function setupNewGraph(ctx, GType, GLabel, GText) {
             }
         }
     }
-    const myChart = new Chart(_ctx, config);
-    return myChart;
+    const myChartTMP = new Chart(_ctx, config);
+    return myChartTMP;
 }
 
 function getData() {
@@ -53,12 +51,6 @@ function getData() {
             // Graficando valores de Amp
             myChart1.data.labels.push(values.time.substring(10));
             myChart1.data.datasets[0].data.push(values.ampValue);
-
-            // myChart2.data.labels.push(values.time.substring(10));
-            // myChart2.data.datasets[0].data.push(values.ampValue);
-
-            // myChart3.data.labels.push(values.time.substring(10));
-            // myChart3.data.datasets[0].data.push(values.ampValue);
             $('#LastVoltvalue').html(values.voltsValue + "V");
             $('#LastAmpvalue').html(values.ampValue + "Amp");
         });

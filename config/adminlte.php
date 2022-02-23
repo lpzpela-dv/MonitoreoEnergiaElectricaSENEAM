@@ -249,7 +249,7 @@ return [
         // ],
         [
             'text'        => 'Monitoreo',
-            'url'         => 'admin/pages',
+            'url'         => 'home',
             'icon'        => 'fas fa-chart-pie',
             //'label'       => 4,
             //'label_color' => 'success',
@@ -257,7 +257,7 @@ return [
         ['header' => 'Configuración'],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'url'  => 'user',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

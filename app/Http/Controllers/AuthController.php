@@ -13,10 +13,21 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $Users = User::All();
-        return view('usuarios',compact('Users'));
+        return view('usuarios', compact('Users'));
+    }
+
+    public function indexAPI()
+    {
+        $Users = User::All();
+        return $Users;
     }
 
     /**
@@ -37,12 +48,14 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'userRol' => 1,
         ]);
+
+        return redirect()->route('user');
     }
 
     /**
@@ -53,7 +66,8 @@ class AuthController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return $user;
     }
 
     /**
@@ -87,6 +101,11 @@ class AuthController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::where("id", $id)->delete();
+        if ($user == 1) {
+            return response()->json(["status" => "success", "id" => $id, "message" => "Registro Eliminado"]);
+        } else {
+            return response()->json(["status" => "failed", "message" => "No fue posible eliminar el usuario"]);
+        }
     }
 }

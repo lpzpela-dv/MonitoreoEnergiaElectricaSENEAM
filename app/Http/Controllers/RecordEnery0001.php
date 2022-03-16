@@ -16,15 +16,20 @@ class RecordEnery0001 extends Controller
     public function index()
     {
         // $data = RecordEnergy_0001::all()->orderBy('id','desc');
-        $data = DB::table('Record_Energy_0001s')->orderBy('time','desc')->limit(15)->get();
+        $data = DB::table('record_energy_cfe_0001s')->orderBy('time', 'desc')->limit(15)->get();
         return $data;
     }
 
-    public function getlast(){
-        $data = DB::table('Record_Energy_0001s')->orderBy('time','desc')->limit(1)->get();
+    public function getlast()
+    {
+        $data = DB::table('Record_Energy_0001s')->orderBy('time', 'desc')->limit(1)->get();
         return $data;
     }
-
+    public function gethst($id)
+    {
+        $data = DB::table('record_energy_cfe_0001s')->where('area_id', $id)->orderBy('time', 'desc')->limit(15)->get();
+        return $data;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -33,8 +38,8 @@ class RecordEnery0001 extends Controller
      */
     public function store(Request $request)
     {
-        $data = RecordEnergy_0001::create($request->all());
-        return $data;
+        // $data = RecordEnergy_0001::create($request->all());
+        // return $data;
     }
 
     /**

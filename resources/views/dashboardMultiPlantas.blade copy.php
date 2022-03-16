@@ -14,10 +14,6 @@
     #fontstext1 {
         font-size: 20px;
     }
-
-    #btn {
-        padding-top: 20px;
-    }
 </style>
 @endsection
 @section('content')
@@ -46,7 +42,7 @@
                 <span class="info-box-icon"><i class="fas fa-hockey-puck"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Litros</span>
-                    <span class="info-box-number">42,410</span>
+                    <span class="info-box-number">41,410</span>
                     <!-- The progress section is optional -->
                     <div class="progress">
                         <div class="progress-bar" style="width: 70%"></div>
@@ -58,62 +54,73 @@
                 <!-- /.info-box-content -->
             </div>
         </div>
-    </div>
+        <div class="col">
+            <div class="info-box">
+                <!-- Apply any bg-* class to to the icon to color it -->
+                <span class="info-box-icon bg-green"><i class="fas fa-bolt"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text" id="fontstext1">Última Lectura Voltaje</span>
+                    <span class="info-box-number" id="LastVoltvalue">220v</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        <div class="col">
+            <div class="info-box">
+                <!-- Apply any bg-* class to to the icon to color it -->
+                <span class="info-box-icon bg-green"><i class="fas fa-plug"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text" id="fontstext">Última Lectura Amperaje</span>
+                    <span class="info-box-number" id="LastAmpvalue">40Amp</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
 
+    </div>
 </div>
 <hr>
 <div class="container-fluid">
-    <div class="row justify-content-md-center">
+    <div class="row">
         <div class="col-md-6">
             <div id="btn">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="hidden" id="cfeVal" value="Volt">
-                    <button type="button" class="btn btn-sm btn-dark active" name="cfeVal" id="Volt1">Volts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cfeVal" id="Amp1">Amp</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cfeVal" id="Watts1">Watts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cfeVal" id="KwH1">Kw/h</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cfeVal" id="Fp1">FP</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cfeVal" id="Hz1">Hz</button>
+                    <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></i></button>
+                    <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
                 </div>
             </div>
             <canvas id="myChart" height="110hv"></canvas>
         </div>
         <div class="col-md-6">
-            <div id="btn">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="hidden" id="cargaVal" value="Amp">
-                    <button type="button" class="btn btn-sm btn-dark active" name="cargaVal" id="Volt2">Volts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Amp2">Amp</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Watts2">Watts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="KwH2">Kw/h</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Fp2">FP</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Hz2">Hz</button>
-                </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></button>
+                <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
             </div>
             <canvas id="myChart1" height="110hv"></canvas>
         </div>
-
-        <div class="col-md-6 ">
-            <div id="btn">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{-- <div id="btn">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="hidden" id="plantaVal" value="Watts">
-                    <button type="button" class="btn btn-sm btn-dark active" name="plantaVal" id="Volt3">Volts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Amp3">Amp</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Watts3">Watts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="KwH3">Kw/h</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Fp3">FP</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" S id="Hz3">Hz</button>
+                    <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></i></button>
+                    <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
                 </div>
-            </div>
+            </div> --}}
             <canvas id="myChart2" height="110hv"></canvas>
         </div>
-
+        <div class="col-md-6">
+            {{-- <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-chart-bar"></i></button>
+                <button type="button" class="btn btn-sm btn-dark active"><i class="fas fa-chart-line"></i></button>
+            </div> --}}
+            <canvas id="myChart3" height="110hv"></canvas>
+        </div>
     </div>
 </div>
-
 @endsection
 @section('js')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-<script src="../js/graph.js"></script>
+<script src="js/graph.js"></script>
 @endsection

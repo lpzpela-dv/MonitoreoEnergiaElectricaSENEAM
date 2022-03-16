@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('energy/data/r0001', RecordEnery0001::class);
+Route::get('energy/data/hst/{id}', [RecordEnery0001::class, 'gethst']);
 Route::get('energy/data/lst/r0001', [RecordEnery0001::class, 'getlast']);
 Route::get('user/lst', [App\Http\Controllers\AuthController::class, 'indexAPI']);
 

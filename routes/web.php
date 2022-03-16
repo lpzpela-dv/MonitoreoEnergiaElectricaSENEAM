@@ -14,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\GeneralController::class, 'index'])->name('general');
+Route::get('/areas/ccar1', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/user', [App\Http\Controllers\AuthController::class, 'index'])->name('user');
 Route::post('/user', [App\Http\Controllers\AuthController::class, 'store'])->name('userRegister');
-Route::delete('/user/{user_id}',[App\Http\Controllers\AuthController::class, 'destroy']);
+Route::delete('/user/{user_id}', [App\Http\Controllers\AuthController::class, 'destroy']);
 Route::get('/user/{user_id}', [App\Http\Controllers\AuthController::class, 'show']);

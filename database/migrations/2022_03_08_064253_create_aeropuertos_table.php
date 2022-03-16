@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecordEnergy0001sTable extends Migration
+class CreateAeropuertosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateRecordEnergy0001sTable extends Migration
      */
     public function up()
     {
-        Schema::create('record_energy_0001s', function (Blueprint $table) {
+        Schema::create('aeropuertos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('planta_id');
-            $table->foreign('planta_id')->references('id')->on('plantas');
-            $table->integer('ampValue');
-            $table->integer('voltsValue');
-            $table->dateTime('time');
+            $table->string('aeropuerto');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateRecordEnergy0001sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('record_energy_0001s');
+        Schema::dropIfExists('aeropuertos');
     }
 }

@@ -15,8 +15,8 @@ class CreateRecordDiesel0001sTable extends Migration
     {
         Schema::create('record_diesel_0001s', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('planta_id');
-            $table->foreign('planta_id')->references('id')->on('plantas');
+            $table->unsignedBigInteger('area_id');
+            $table->foreign('area_id')->references('id')->on('areas');
             $table->integer('dieselValue');
             $table->dateTime('time');
             $table->timestamps();

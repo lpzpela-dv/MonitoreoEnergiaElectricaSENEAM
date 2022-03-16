@@ -15,6 +15,8 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('aeropuerto_id');
+            $table->foreign('aeropuerto_id')->references('id')->on('aeropuertos');
             $table->string('areaName', 50);
             $table->integer('maxDiesel');
             $table->timestamps();

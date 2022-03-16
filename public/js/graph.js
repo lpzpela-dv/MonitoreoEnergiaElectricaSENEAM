@@ -30,7 +30,17 @@ async function updateData(btn) {
         case "cfeVal":
             myChart.destroy();
             myChart = setupNewGraph('myChart', 'line', 'Volts', 'Variación de voltaje');
-            getData(1, myChart, $("#" + btn.name).attr('value'));
+            getData(1, myChart, $("#" + btn.name).attr('value'), 1);
+            break;
+        case "cargaVal":
+            myChart1.destroy();
+            myChart1 = setupNewGraph('myChart1', 'line', 'Volts', 'Variación de voltaje');
+            getData(1, myChart1, $("#" + btn.name).attr('value'));
+            break;
+        case "plantaCal":
+            myChart2.destroy();
+            myChart2 = setupNewGraph('myChart2', 'line', 'Volts', 'Variación de voltaje');
+            getData(1, myChart2, $("#" + btn.name).attr('value'));
             break;
     }
 }
@@ -121,54 +131,61 @@ function setupNewGraph(ctx, GType, GLabel, GText) {
     return myChartTMP;
 }
 
-function getData(flag = null, chart = null, type = null) {
+function getData(flag = null, chart = null, type = null, f = null) {
 
     switch (flag) {
         case 1:
 
-            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/2", function (data) {
+            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+                console.log("segundo filtro");
+                console.log(data);
                 Object.values(data).reverse().forEach(values => {
                     // Graficando valores de volts
                     console.log("type: " + type);
                     switch (type) {
                         case "Amp":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
+                            // for (let i = 0; i < 3 + f; i++) {
+                            //     let num = "Ampl" + i + f;
+                            //     chart.data.datasets[i].data.push(values.AmpL1);
+                            //     console.log(num + " " + values.num);
+                            // }
                             chart.data.datasets[0].data.push(values.AmpL1);
                             chart.data.datasets[1].data.push(values.AmpL2);
                             chart.data.datasets[2].data.push(values.AmpL3);
                             break;
                         case "Volt":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
                             chart.data.datasets[0].data.push(values.VoltL1);
                             chart.data.datasets[1].data.push(values.VoltL2);
                             chart.data.datasets[2].data.push(values.VoltL3);
                             break;
                         case "Watts":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
                             chart.data.datasets[0].data.push(values.WattsL1);
                             chart.data.datasets[1].data.push(values.WattsL2);
                             chart.data.datasets[2].data.push(values.WattsL3);
                             break;
                         case "KwH":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
                             chart.data.datasets[0].data.push(values.KwHL1);
                             chart.data.datasets[1].data.push(values.KwHL2);
                             chart.data.datasets[2].data.push(values.KwHL3);
                             break;
                         case "Fp":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
                             chart.data.datasets[0].data.push(values.FpL1);
                             chart.data.datasets[1].data.push(values.FpL2);
                             chart.data.datasets[2].data.push(values.FpL3);
                             break;
                         case "Hz":
-                            chart.data.labels.push(values.time.substring(10));
+                            chart.data.labels.push(values.regtime.substring(10));
                             chart.data.datasets[0].data.push(values.HzL1);
                             chart.data.datasets[1].data.push(values.HzL2);
                             chart.data.datasets[2].data.push(values.HzL3);
                             break;
                     }
-                    $("#lastValueVolt").val(values.time.substring(10));
+                    $("#lastValueVolt").val(values.regtime.substring(10));
                 });
                 myChart.update();
                 // myChart1.update();
@@ -178,14 +195,26 @@ function getData(flag = null, chart = null, type = null) {
             break;
 
         default:
-            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/2", function (data) {
+            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+                console.log("primer filtro");
+                console.log(data);
                 Object.values(data).reverse().forEach(values => {
-                    // Graficando valores de volts
-                    myChart.data.labels.push(values.time.substring(10));
+                    // Graficando valores de CFE
+                    myChart.data.labels.push(values.regtime.substring(10));
                     myChart.data.datasets[0].data.push(values.VoltL1);
                     myChart.data.datasets[1].data.push(values.VoltL2);
                     myChart.data.datasets[2].data.push(values.VoltL3);
-                    $("#lastValueVolt").val(values.time.substring(10));
+                    $("#lastValueVolt").val(values.regtime.substring(10));
+                    // Graficando valores de Planta
+                    myChart2.data.labels.push(values.regtime.substring(10));
+                    myChart2.data.datasets[0].data.push(values.VoltL4);
+                    myChart2.data.datasets[1].data.push(values.VoltL5);
+                    myChart2.data.datasets[2].data.push(values.VoltL6);
+                    // Graficando valores de Carga
+                    myChart1.data.labels.push(values.regtime.substring(10));
+                    myChart1.data.datasets[0].data.push(values.VoltL7);
+                    myChart1.data.datasets[1].data.push(values.VoltL8);
+                    myChart1.data.datasets[2].data.push(values.VoltL9);
                     // Graficando valores de Amp
                     // myChart1.data.labels.push(values.time.substring(10));
                     // myChart1.data.datasets[0].data.push(values.ampValue);
@@ -193,8 +222,8 @@ function getData(flag = null, chart = null, type = null) {
                     // $('#LastAmpvalue').html(values.ampValue + "Amp");
                 });
                 myChart.update();
-                // myChart1.update();
-                // myChart2.update();
+                myChart1.update();
+                myChart2.update();
                 // myChart3.update();
             });
             break;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRecordDiesel0001sTable extends Migration
+class CreateAeropuertosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateRecordDiesel0001sTable extends Migration
      */
     public function up()
     {
-        Schema::create('record_diesel_0001s', function (Blueprint $table) {
+        Schema::create('aeropuertos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('areas');
-            $table->integer('dieselValue');
-            $table->dateTime('time');
+            $table->string('shortName');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateRecordDiesel0001sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('record_diesel_0001s');
+        Schema::dropIfExists('aeropuertos');
     }
 }

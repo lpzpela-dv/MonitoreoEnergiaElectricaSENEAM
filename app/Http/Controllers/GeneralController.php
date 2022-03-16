@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aeropuerto;
-use App\Models\Area;
-use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {

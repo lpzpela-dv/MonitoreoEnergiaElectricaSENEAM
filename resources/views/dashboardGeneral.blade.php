@@ -23,14 +23,6 @@
     <input type="hidden" id="lastValueVolt">
     <hr>
     <table class="table table-borderless">
-        {{-- <thead>
-            <tr>
-                <th scope="col">
-                    <h5><span class="badge bg-success">Encendido</span></h5>
-                    <h5><span class="badge bg-danger">Apagado</span></h5>
-                </th>
-            </tr>
-        </thead> --}}
         <tbody>
             <tr>
                 <th scope="row">Estatus de Areas</th>
@@ -117,10 +109,12 @@
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <select id="disabledSelect" class="form-select">
+                            <select id="selectAero" class="form-select">
 
                                 @foreach ($aeropuertos as $aeropuerto)
-                                <option>{{ $aeropuerto['aeropuerto'] }} - {{ $aeropuerto['description'] }}</option>
+                                <option value="{{ $aeropuerto['id'] }}" selected>{{ $aeropuerto['shortName'] }} -
+                                    {{
+                                    $aeropuerto['description'] }}</option>
                                 @endforeach
 
                             </select>
@@ -128,7 +122,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Aceptar</button>
+                    <button type="button" id="btnAero" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
         </div>
@@ -437,5 +431,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {{-- <script src="js/graph.js"></script> --}}
 @endsection

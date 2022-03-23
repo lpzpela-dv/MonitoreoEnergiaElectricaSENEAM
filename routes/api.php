@@ -23,7 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('energy/data/r0001', RecordEnery0001::class);
 
-Route::get('energy/data/lst/r0001', [RecordEnery0001::class, 'getlast']);
 Route::get('user/lst', [App\Http\Controllers\AuthController::class, 'indexAPI']);
 
 
@@ -32,7 +31,8 @@ Route::get('status/area/lst/{id}', [ApirestController::class, 'getAreaStatus']);
 
 //Obtener losultimos 15 de area
 Route::get('energy/data/hst/{id}', [ApirestController::class, 'gethst']);
-
+//Obtener el ultimo registro
+Route::get('energy/data/lst', [ApirestController::class, 'getLst']);
 
 
 // Route::get('/data',function(){

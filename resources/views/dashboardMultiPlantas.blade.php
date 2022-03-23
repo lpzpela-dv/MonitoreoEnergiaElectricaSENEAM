@@ -22,7 +22,7 @@
 @endsection
 @section('content')
 <div id="padd" class="container-fluid">
-    <input type="hidden" id="lastValueVolt">
+    <input type="hidden" id="lastValue">
     <div class="row">
         <div class="col">
             <div class="info-box bg-yellow">
@@ -81,13 +81,13 @@
         <div class="col-md-6">
             <div id="btn">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="hidden" id="cargaVal" value="Amp">
-                    <button type="button" class="btn btn-sm btn-dark active" name="cargaVal" id="Volt2">Volts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Amp2">Amp</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Watts2">Watts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="KwH2">Kw/h</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Fp2">FP</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Hz2">Hz</button>
+                    <input type="hidden" id="plantaVal" value="Volt">
+                    <button type="button" class="btn btn-sm btn-dark active" name="plantaVal" id="Volt2">Volts</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Amp2">Amp</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Watts2">Watts</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="KwH2">Kw/h</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Fp2">FP</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Hz2">Hz</button>
                 </div>
             </div>
             <canvas id="myChart1" height="110hv"></canvas>
@@ -96,13 +96,13 @@
         <div class="col-md-6 ">
             <div id="btn">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <input type="hidden" id="plantaVal" value="Watts">
-                    <button type="button" class="btn btn-sm btn-dark active" name="plantaVal" id="Volt3">Volts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Amp3">Amp</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Watts3">Watts</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="KwH3">Kw/h</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" id="Fp3">FP</button>
-                    <button type="button" class="btn btn-sm btn-dark" name="plantaVal" S id="Hz3">Hz</button>
+                    <input type="hidden" id="cargaVal" value="Volt">
+                    <button type="button" class="btn btn-sm btn-dark active" name="cargaVal" id="Volt3">Volts</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Amp3">Amp</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Watts3">Watts</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="KwH3">Kw/h</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" id="Fp3">FP</button>
+                    <button type="button" class="btn btn-sm btn-dark" name="cargaVal" S id="Hz3">Hz</button>
                 </div>
             </div>
             <canvas id="myChart2" height="110hv"></canvas>

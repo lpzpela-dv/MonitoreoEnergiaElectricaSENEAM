@@ -20,4 +20,9 @@ class ApirestController extends Controller
         // $records = EnergyRecord::where('area_id', $id)->orderBy('regfecha', 'desc')->limit(15)->get();
         return $records;
     }
+    public function getLst()
+    {
+        $register = EnergyRecord::orderBy('regtime', 'desc')->limit(1)->get();
+        return $register;
+    }
 }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\data;
+use App\Models\RecordEnergy_0001;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class DataController extends Controller
+class RecordEnery0001 extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,21 @@ class DataController extends Controller
      */
     public function index()
     {
-
+        // $data = RecordEnergy_0001::all()->orderBy('id','desc');
+        $data = DB::table('record_energy_cfe_0001s')->orderBy('time', 'desc')->limit(15)->get();
+        return $data;
     }
 
+    public function getlast()
+    {
+        $data = DB::table('Record_Energy_0001s')->orderBy('time', 'desc')->limit(1)->get();
+        return $data;
+    }
+    public function gethst($id)
+    {
+        $data = DB::table('record_energy_cfe_0001s')->where('area_id', $id)->orderBy('time', 'desc')->limit(15)->get();
+        return $data;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -25,13 +38,8 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = new data();
-        // $data->planta_id = $request->planta_id;
-        // $data->dieselValue = $request->dieselValue;
-        // $data->voltsValue = $request->voltsValue;
-        // $data->ampValue = $request->ampValue;
-        // $data->save();
-        // return $request;
+        // $data = RecordEnergy_0001::create($request->all());
+        // return $data;
     }
 
     /**
@@ -42,8 +50,7 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        // $data = data::all()->where('planta_id',$id);
-        // return $data;
+        //
     }
 
     /**

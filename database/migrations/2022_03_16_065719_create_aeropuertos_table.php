@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataTable extends Migration
+class CreateAeropuertosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('data', function (Blueprint $table) {
+        Schema::create('aeropuertos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('planta_id')->nullable();
-            $table->foreign('planta_id')->references('id')->on('plantas')->onDelete('cascade');
-            $table->float('dieselValue',6,2);
-            $table->integer('voltsValue');
-            $table->integer('ampValue');
+            $table->string('shortName');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data');
+        Schema::dropIfExists('aeropuertos');
     }
 }

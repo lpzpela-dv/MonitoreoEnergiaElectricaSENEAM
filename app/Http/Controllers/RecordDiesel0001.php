@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\data;
 use Illuminate\Http\Request;
 
-class DataController extends Controller
+class RecordDiesel0001 extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class DataController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -25,13 +24,7 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = new data();
-        // $data->planta_id = $request->planta_id;
-        // $data->dieselValue = $request->dieselValue;
-        // $data->voltsValue = $request->voltsValue;
-        // $data->ampValue = $request->ampValue;
-        // $data->save();
-        // return $request;
+        
     }
 
     /**
@@ -42,8 +35,7 @@ class DataController extends Controller
      */
     public function show($id)
     {
-        // $data = data::all()->where('planta_id',$id);
-        // return $data;
+        //
     }
 
     /**

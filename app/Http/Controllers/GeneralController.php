@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Aeropuerto;
 
-class HomeController extends Controller
+class GeneralController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboardMultiPlantas');
+        $aeropuertos = Aeropuerto::all();
+        return view('dashboardGeneral', compact('aeropuertos'));
     }
 }

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Monitoreo BETA',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -189,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -236,28 +236,48 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
-        // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
         [
             'text'        => 'Monitoreo',
-            'url'         => 'admin/pages',
+            'url'         => '/',
             'icon'        => 'fas fa-chart-pie',
             //'label'       => 4,
             //'label_color' => 'success',
         ],
+        [
+            'text'    => 'Areas',
+            'icon'    => 'fa-solid fa-map',
+            'submenu' => [
+                [
+                    'text' => 'CCAR1',
+                    'icon'        => 'fa-solid fa-location-dot',
+                    'url'  => 'areas/ccar1',
+                ],
+                [
+                    'text' => 'CCAR2',
+                    'icon'        => 'fa-solid fa-location-dot',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'VOR',
+                    'icon'        => 'fa-solid fa-location-dot',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'RADAR',
+                    'icon'        => 'fa-solid fa-location-dot',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Terrena',
+                    'icon'        => 'fa-solid fa-location-dot',
+                    'url'  => '#',
+                ],
+            ],
+        ],
         ['header' => 'Configuración'],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin/settings',
+            'url'  => 'user',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

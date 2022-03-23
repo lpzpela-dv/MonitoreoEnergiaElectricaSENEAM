@@ -21,42 +21,47 @@ async function getStatusArea() {
     resp.forEach(area => {
         if (area.VoltL7 == null || area.VoltL8 == null || area.VoltL9 == null) {
             color = 'light';
-            v1 = "N/A";
-            v2 = "N/A";
-            v3 = "N/A";
+            // v1 = "N/A";
+            // v2 = "N/A";
+            // v3 = "N/A";
         } else {
             if (parseFloat(area.VoltL7) <= 117 || parseFloat(area.VoltL8) <= 117 || parseFloat(area.VoltL9) <= 117) {
                 color = 'danger';
-                v1 = area.VoltL7;
-                v2 = area.VoltL8;
-                v3 = area.VoltL9;
+                // v1 = area.VoltL7;
+                // v2 = area.VoltL8;
+                // v3 = area.VoltL9;
             } else {
                 if (parseFloat(area.VoltL4) > 117 || parseFloat(area.VoltL5) > 117 || parseFloat(area.VoltL6) > 117) {
                     color = 'warning';
-                    v1 = area.VoltL4;
-                    v2 = area.VoltL5;
-                    v3 = area.VoltL6;
+                    // v1 = area.VoltL4;
+                    // v2 = area.VoltL5;
+                    // v3 = area.VoltL6;
                 } else {
                     if (parseFloat(area.VoltL1) > 117 || parseFloat(area.VoltL2) > 117 || parseFloat(area.VoltL3) > 117) {
                         color = 'success';
-                        v1 = area.VoltL1;
-                        v2 = area.VoltL2;
-                        v3 = area.VoltL3;
+                        // v1 = area.VoltL1;
+                        // v2 = area.VoltL2;
+                        // v3 = area.VoltL3;
                     }
                 }
             }
         }
-        vhtml += '<td class="text-center"><span tabindex="0" data-bs-toggle="popover" title="Ultima Lectura" data-bs-trigger="hover focus" data-bs-content="Fase1: ' + v1 + 'v Fase2: ' + v2 + 'v Fase3: ' + v3 + 'v"><button type="button" class=" btn btn-sm btn-' + color + ' rounded-pill" style="width: 5rem; height:5rem;">' + area.areaName + '</button></span></td>"';
+        vhtml += '<td class="text-center"><button type="button" class=" btn btn-sm btn-' + color + ' rounded-pill" style="width: 5rem; height:5rem;">' + area.areaName + '</button></td>"';
         color = '';
-        v1, v2, v3 = '';
+        // v1, v2, v3 = '';
     });
     $("#showAreas").html(vhtml);
-    preparePoper()
+    // preparePoper()
 
-    function preparePoper() {
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl)
-        })
-    }
+    // function preparePoper() {
+    //     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    //     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    //         return new bootstrap.Popover(popoverTriggerEl)
+    //     })
+    // }
 }
+
+setInterval(() => {
+    console.log("Actualizando data");
+    getStatusArea();
+}, 5000);

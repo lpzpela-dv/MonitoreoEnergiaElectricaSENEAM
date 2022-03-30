@@ -38,50 +38,15 @@
                 <canvas id="myChartDiesel" height="110hv"></canvas>
             </div>
             <div class="col">
-                <table class="table table-striped table-hover">
+                <table id="tableAlertas" class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" class="text-center">Area</th>
                             <th scope="col" class="text-center">Log de eventos</th>
-                            <th scope="col">Fecha</th>
+                            <th scope="col" class="text-center">Fecha</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td class="text-center">Carga de sitio CCRA2 APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td class="text-center">Carga de sitio CCRA2 ENCENDIDO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td class="text-center">Carga de sitio TERRENA APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td class="text-center">Carga de sitio CCRA2 APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td class="text-center">Carga de sitio CCRA2 APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td class="text-center">Carga de sitio CCRA2 APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td class="text-center">Carga de sitio CCRA2 APAGADO</td>
-                            <td>15/03/2022 12:22:00</td>
-                        </tr>
 
                     </tbody>
                 </table>

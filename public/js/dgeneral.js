@@ -32,14 +32,10 @@ async function getStatusArea() {
     let resp = await fetch('http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let vhtml = '';
     let color = '';
-    let v1, v2, v3 = '';
     console.log(resp);
     resp.forEach(area => {
         if (area.VoltL7 == null || area.VoltL8 == null || area.VoltL9 == null) {
             color = 'light';
-            // v1 = "N/A";
-            // v2 = "N/A";
-            // v3 = "N/A";
         } else {
             if (parseFloat(area.VoltL7) <= 117 || parseFloat(area.VoltL8) <= 117 || parseFloat(area.VoltL9) <= 117) {
                 color = 'danger';
@@ -55,17 +51,22 @@ async function getStatusArea() {
         }
         vhtml += '<td class="text-center"><button type="button" class=" btn btn-sm btn-' + color + ' rounded-pill" style="width: 5rem; height:5rem;">' + area.areaName + '</button></td>"';
         color = '';
-        // v1, v2, v3 = '';
     });
     $("#showAreas").html(vhtml);
-    // preparePoper()
 
-    // function preparePoper() {
-    //     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    //     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    //         return new bootstrap.Popover(popoverTriggerEl)
-    //     })
-    // }
+}
+
+async function getLogEvents() {
+    let res = await fetch('http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api//alarmas/lst').then(response => response.json());
+    console.log(res);
+    const tbody = document.querySelector('#tableAlertas tbody');
+    tbody.innerHTML = '';
+    res.forEach(log => {
+        let fila = tbody.insertRow();
+        fila.insertCell().innerHTML = log.areaName;
+        fila.insertCell().innerHTML = log.alarma;
+        fila.insertCell().innerHTML = log.fechaAlarma;
+    });
 }
 
 function setupNewGraph(ctx, GType, GText) {
@@ -119,4 +120,5 @@ function setupNewGraph(ctx, GType, GText) {
 setInterval(() => {
     console.log("Actualizando data");
     getStatusArea();
+    getLogEvents;
 }, 3000);

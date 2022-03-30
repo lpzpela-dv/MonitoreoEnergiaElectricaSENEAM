@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlarmaController;
 use App\Http\Controllers\ApirestController;
-use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\RecordEnery0001;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,10 @@ Route::get('status/area/lst/{id}', [ApirestController::class, 'getAreaStatus']);
 Route::get('energy/data/hst/{id}', [ApirestController::class, 'gethst']);
 //Obtener el ultimo registro
 Route::get('energy/data/lst', [ApirestController::class, 'getLst']);
+//Envíar notificaciónes por correo
+Route::get('/notifications/{alertId}/{type}', [NotificationsController::class, 'sendAlert']);
 
+Route::get('/alarmas/lst', [AlarmaController::class, 'getViewAlarma']);
 
 // Route::get('/data',function(){
 //     //return "getData";

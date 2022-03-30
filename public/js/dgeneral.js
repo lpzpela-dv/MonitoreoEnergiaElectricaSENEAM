@@ -59,13 +59,10 @@ async function getStatusArea() {
 async function getLogEvents() {
     let res = await fetch('http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api//alarmas/lst').then(response => response.json());
     console.log(res);
-    const tbody = document.querySelector('#tableAlertas tbody');
+    const tbody = $("#tb");
     tbody.innerHTML = '';
     res.forEach(log => {
-        let fila = tbody.insertRow();
-        fila.insertCell().innerHTML = log.areaName;
-        fila.insertCell().innerHTML = log.alarma;
-        fila.insertCell().innerHTML = log.fechaAlarma;
+        $("#tb").innerHTML('<tr><td>' + log.areaName + '</td><td>' + log.alarma + '</td><td>' + log.fechaAlarma + '</td></tr>');
     });
 }
 

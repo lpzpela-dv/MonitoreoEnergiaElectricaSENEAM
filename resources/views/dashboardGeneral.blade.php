@@ -38,7 +38,7 @@
                 <canvas id="myChartDiesel" height="110hv"></canvas>
             </div>
             <div class="col">
-                <table id="tableAlertas" class="table table-striped table-hover">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">Area</th>
@@ -46,13 +46,13 @@
                             <th scope="col" class="text-center">Fecha</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tb">
 
                     </tbody>
                 </table>
             </div>
         </div>
-
+        .env.example
         {{-- modal para seleccionar aeropuerto --}}
         <div class="modal fade" id="selecAero" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

@@ -52,7 +52,6 @@
                 </table>
             </div>
         </div>
-        .env.example
         {{-- modal para seleccionar aeropuerto --}}
         <div class="modal fade" id="selecAero" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

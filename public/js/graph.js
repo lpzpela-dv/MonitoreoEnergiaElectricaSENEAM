@@ -128,7 +128,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
     switch (flag) {
         case 1:
 
-            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+            $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
                 Object.values(data).reverse().forEach(values => {
                     // Graficando valores de volts
                     switch (type) {
@@ -182,7 +182,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
             break;
 
         default:
-            $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+            $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
                 Object.values(data).reverse().forEach(values => {
                     myChart.data.labels.push(values.regtime.substring(10));
                     myChart2.data.labels.push(values.regtime.substring(10));
@@ -264,7 +264,7 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 }
 
 setInterval(() => {
-    $.get("http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
+    $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
         if (data[0].regtime.substring(10) != $("input#lastValue").val()) {
             //Envíar los charts al update data
             autUpdate(myChart, $("#cfeVal").attr('value'), 1, data);
@@ -282,7 +282,7 @@ setInterval(() => {
 
 
 // setInterval(async () => {
-//     const res = await fetch('http://localhost:8080/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001').then(response => response.json());
+//     const res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001').then(response => response.json());
 
 //     if ($("input#lastValueVolt").val() != res[0].time.substring(10)) {
 //         console.log('dentro');

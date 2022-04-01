@@ -35,21 +35,3 @@ function confirmDelete(id) {
         }
     });
 }
-
-                        // let reg = ""
-                        // $.get("api/user/lst", function (users) {
-                        //     console.log(users);
-                        //     users.forEach(element => {
-                        //         if (element.rol == 2) {
-                        //             var rol = "Administrador";
-                        //         } else {
-                        //             var rol = "Supervisor";
-                        //         }
-
-                        //         reg += "" + "<tr><th>" + element.name + "</th><td>" + element.email + "</td><td>" + rol + "</td><td>" + '<button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteUser(' + element.id + ')"><i class="fa-solid fa-trash"></i></button>' + "</td></tr>";
-
-                        //     });
-                        //     console.log(reg)
-                        //     $('tbody').append(reg);
-                        //     //Realizar un foreach y hacer un append altbody para mostrar usuarios y probar
-                        // })

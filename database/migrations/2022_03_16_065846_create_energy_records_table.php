@@ -72,8 +72,8 @@ class CreateEnergyRecordsTable extends Migration
             $table->float('HzL8', 10, 4);
             $table->float('HzL9', 10, 4);
             $table->float('volDiesel', 10, 3);
-            $table->float('stCFE', 10, 3);
-            $table->float('stPlanta', 10, 3);
+            $table->integer('stCFE');
+            $table->integer('stPlanta');
             $table->dateTime('regtime');
             $table->timestamps();
         });

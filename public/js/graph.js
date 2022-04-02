@@ -89,7 +89,8 @@ function setupNewGraph(ctx, GType, GLabel, GText) {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    grace: 2
+                    grace: 2,
+                    beginAtZero: true
 
                 },
                 y1: {

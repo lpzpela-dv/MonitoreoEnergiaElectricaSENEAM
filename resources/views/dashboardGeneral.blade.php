@@ -46,8 +46,7 @@
                             <th scope="col" class="text-center">Fecha</th>
                         </tr>
                     </thead>
-                    <tbody id="tb">
-
+                    <tbody id="tablebody">
                     </tbody>
                 </table>
             </div>

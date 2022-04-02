@@ -59,11 +59,12 @@ async function getStatusArea() {
 async function getLogEvents() {
     let res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/alarmas/lst').then(response => response.json());
     console.log(res);
-    const tbody = $("#tb");
-    tbody.innerHTML = '';
+    const tbody = $("#tablebody");
+    let rows = '';
     res.forEach(log => {
-        $("#tb").innerHTML('<tr><td>' + log.areaName + '</td><td>' + log.alarma + '</td><td>' + log.fechaAlarma + '</td></tr>');
+        rows += '<tr><td>' + log.areaName + '</td><td>' + log.alarma + '</td><td>' + log.fechaAlarma + '</td></tr>';
     });
+    tbody.html(rows);
 }
 
 function setupNewGraph(ctx, GType, GText) {
@@ -116,6 +117,6 @@ function setupNewGraph(ctx, GType, GText) {
 
 setInterval(() => {
     console.log("Actualizando data");
+    getLogEvents();
     getStatusArea();
-    getLogEvents;
 }, 3000);

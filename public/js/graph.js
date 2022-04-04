@@ -267,25 +267,47 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 
 }
 
-function validandoContactor(data) {
+function validandoContactor(data = null) {
     let htmlCFE = "";
     let htmlPlanta = "";
-    data.forEach(values => {
-        if (values.stCFE == 1) {
-            htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
-        } else {
-            if (values.stCFE == 0) {
-                htmlCFE = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+    if (data == null) {
+        $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
+            data.forEach(values => {
+                if (values.stCFE == 1) {
+                    htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
+                } else {
+                    if (values.stCFE == 0) {
+                        htmlCFE = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+                    }
+                }
+                if (values.stPlanta == 1) {
+                    htmlPlanta = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
+                } else {
+                    if (values.stPlanta == 0) {
+                        htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+                    }
+                }
+            });
+        });
+    } else {
+        data.forEach(values => {
+            if (values.stCFE == 1) {
+                htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
+            } else {
+                if (values.stCFE == 0) {
+                    htmlCFE = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+                }
             }
-        }
-        if (values.stPlanta == 1) {
-            htmlPlanta = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
-        } else {
-            if (values.stPlanta == 0) {
-                htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+            if (values.stPlanta == 1) {
+                htmlPlanta = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
+            } else {
+                if (values.stPlanta == 0) {
+                    htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+                }
             }
-        }
-    });
+        });
+    }
+
     $("#contCFE").html(htmlCFE);
     $("#contPlanta").html(htmlPlanta);
 }

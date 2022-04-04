@@ -130,7 +130,9 @@ function getData(flag = null, chart = null, type = null, f = null) {
         case 1:
 
             $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+                let cont = 0;
                 Object.values(data).reverse().forEach(values => {
+                    cont = cont + 1;
                     // Graficando valores de volts
                     switch (type) {
                         case "Amp":
@@ -179,6 +181,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
                     $("#lastValue").val(values.regtime.substring(10));
                 });
                 chart.update();
+                validandoContactor(data[cont - 1]);
             });
             break;
 

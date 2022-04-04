@@ -267,18 +267,18 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 function validandoContactor(data) {
     let htmlCFE = "";
     let htmlPlanta = "";
-    data.forEach(element => {
-        if (data.stCFE == 1) {
+    data.forEach(values => {
+        if (values.stCFE == 1) {
             htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
         } else {
-            if (data.stCFE == 0) {
+            if (values.stCFE == 0) {
                 htmlCFE = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">DESACTIVADO</span></div></div>';
             }
         }
-        if (data.stPlanta == 1) {
+        if (values.stPlanta == 1) {
             htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
         } else {
-            if (data.stPlanta == 0) {
+            if (values.stPlanta == 0) {
                 htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';
             }
         }
@@ -303,28 +303,3 @@ setInterval(() => {
 
     });
 }, 5000);
-
-
-// setInterval(async () => {
-//     const res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/r0001').then(response => response.json());
-
-//     if ($("input#lastValueVolt").val() != res[0].time.substring(10)) {
-//         console.log('dentro');
-//         myChart.data.labels.splice(0, 1);
-//         myChart.data.datasets[0].data.splice(0, 1);
-//         myChart.data.labels.push(res[0].time.substring(10));
-//         myChart.data.datasets[0].data.push(res[0].voltsValue);
-//         // Valores de Amp
-//         myChart1.data.labels.splice(0, 1);
-//         myChart1.data.datasets[0].data.splice(0, 1);
-//         myChart1.data.labels.push(res[0].time.substring(10));
-//         myChart1.data.datasets[0].data.push(res[0].ampValue);
-//         $("#lastValueVolt").val(res[0].time.substring(10));
-//         $('#LastVoltvalue').html(res[0].voltsValue + "V");
-//         $('#LastAmpvalue').html(res[0].ampValue + "Amp");
-//     }
-//     myChart.update();
-//     myChart1.update();
-//     console.log($("input#lastValueVolt").val());
-//     console.log(res[0].time.substring(10));
-// }, 4000);

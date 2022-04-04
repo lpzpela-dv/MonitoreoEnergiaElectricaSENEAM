@@ -276,7 +276,7 @@ function validandoContactor(data) {
             }
         }
         if (values.stPlanta == 1) {
-            htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
+            htmlPlanta = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
         } else {
             if (values.stPlanta == 0) {
                 htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';

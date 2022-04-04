@@ -1,4 +1,4 @@
-const { set } = require("lodash");
+// const { set } = require("lodash");
 
 $(document).ready(function () {
     getData();
@@ -271,6 +271,7 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 }
 
 function setDieselValue(data) {
+    console.log(data);
     $("#litrosVal").html(data.volDiesel);
 }
 

@@ -23,6 +23,8 @@
 @section('content')
 <div id="padd" class="container-fluid">
     <input type="hidden" id="lastValue">
+    <input type="hidden" id="stCFE">
+    <input type="hidden" id="stPlanta">
     <div class="row">
         <div class="col">
             <div class="info-box bg-yellow">
@@ -42,20 +44,25 @@
             </div>
         </div>
         <div class="col">
-            <div class="info-box bg-green">
-                <span class="info-box-icon"><i class="fas fa-hockey-puck"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Litros</span>
-                    <span class="info-box-number">42,410</span>
-                    <!-- The progress section is optional -->
-                    <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
+            <div class="row">
+                <div id="contCFE" class="col-md-6">
+                    <div class="info-box bg-success">
+                        <span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Contactor CFE</span>
+                            <span class="info-box-number">ACTIVADO</span>
+                        </div>
                     </div>
-                    <span class="progress-description">
-                        70% 17 Enero 13:25
-                    </span>
                 </div>
-                <!-- /.info-box-content -->
+                <div id="contPlanta" class="col-md-6">
+                    <div class="info-box bg-danger">
+                        <span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Contactor Planta</span>
+                            <span class="info-box-number">DESACTIVADO</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -115,5 +122,6 @@
 @section('js')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+<script src="https://kit.fontawesome.com/c5bf36bb97.js" crossorigin="anonymous"></script>
 <script src="../js/graph.js"></script>
 @endsection

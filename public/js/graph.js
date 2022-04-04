@@ -264,6 +264,29 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 
 }
 
+function validandoContactor(data) {
+    let htmlCFE = "";
+    let htmlPlanta = "";
+    data.forEach(element => {
+        if (data.stCFE == 1) {
+            htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
+        } else {
+            if (data.stCFE == 0) {
+                htmlCFE = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+            }
+        }
+        if (data.stPlanta == 1) {
+            htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">ACTIVADO</span></div></div>';
+        } else {
+            if (data.stPlanta == 0) {
+                htmlPlanta = '<div class="info-box bg-danger"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor Planta</span><span class="info-box-number">DESACTIVADO</span></div></div>';
+            }
+        }
+    });
+    $("#contCFE").html(htmlCFE);
+    $("#contPlanta").html(htmlPlanta);
+}
+
 setInterval(() => {
     $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
         if (data[0].regtime.substring(10) != $("input#lastValue").val()) {

@@ -46,7 +46,7 @@
         <div class="col">
             <div class="row">
                 <div id="contCFE" class="col-md-6">
-                    <div class="info-box bg-success">
+                    <div class="info-box bg-light">
                         <span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Contactor CFE</span>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div id="contPlanta" class="col-md-6">
-                    <div class="info-box bg-danger">
+                    <div class="info-box bg-light">
                         <span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Contactor Planta</span>

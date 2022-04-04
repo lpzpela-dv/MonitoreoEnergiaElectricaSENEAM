@@ -333,7 +333,7 @@ setInterval(() => {
         console.log("Hora guardada: " + $("input#lastValue").val());
         console.log("Ultima Hora: " + data[0].regtime.substring(10));
         validandoContactor(data);
-        setDieselValue(data);
+        setDieselValue(data[0]);
 
     });
 }, 5000);

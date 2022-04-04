@@ -130,9 +130,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
         case 1:
 
             $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
-                let cont = 0;
                 Object.values(data).reverse().forEach(values => {
-                    cont = cont + 1;
                     // Graficando valores de volts
                     switch (type) {
                         case "Amp":
@@ -181,13 +179,14 @@ function getData(flag = null, chart = null, type = null, f = null) {
                     $("#lastValue").val(values.regtime.substring(10));
                 });
                 chart.update();
-                validandoContactor(data[cont - 1]);
             });
             break;
 
         default:
+            let cont = 0;
             $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
                 Object.values(data).reverse().forEach(values => {
+                    cont = cont + 1;
                     myChart.data.labels.push(values.regtime.substring(10));
                     myChart2.data.labels.push(values.regtime.substring(10));
                     myChart1.data.labels.push(values.regtime.substring(10));
@@ -198,6 +197,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
                     }
                     $("#lastValue").val(values.regtime.substring(10));
                 });
+                validandoContactor(data[cont - 1]);
                 myChart.update();
                 myChart1.update();
                 myChart2.update();

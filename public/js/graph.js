@@ -199,8 +199,8 @@ function getData(flag = null, chart = null, type = null, f = null) {
                     }
                     $("#lastValue").val(values.regtime.substring(10));
                 });
-                validandoContactor([data[cont - 1]]);
-                setDieselValue(data[cont - 1]);
+                validandoContactor([data[0]]);
+                setDieselValue(data[0]);
                 myChart.update();
                 myChart1.update();
                 myChart2.update();

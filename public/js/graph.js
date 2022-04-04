@@ -1,3 +1,5 @@
+const { set } = require("lodash");
+
 $(document).ready(function () {
     getData();
 });
@@ -198,6 +200,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
                     $("#lastValue").val(values.regtime.substring(10));
                 });
                 validandoContactor([data[cont - 1]]);
+                setDieselValue(data[cont - 1]);
                 myChart.update();
                 myChart1.update();
                 myChart2.update();
@@ -267,6 +270,10 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 
 }
 
+function setDieselValue(data) {
+    $("#litrosVal").html(data.volDiesel);
+}
+
 function validandoContactor(data = null) {
     let htmlCFE = "";
     let htmlPlanta = "";
@@ -325,6 +332,7 @@ setInterval(() => {
         console.log("Hora guardada: " + $("input#lastValue").val());
         console.log("Ultima Hora: " + data[0].regtime.substring(10));
         validandoContactor(data);
+        setDieselValue(data);
 
     });
 }, 5000);

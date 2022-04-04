@@ -31,7 +31,7 @@
                 <span class="info-box-icon"><i class="fas fa-hockey-puck"></i></span>
                 <div class="info-box-content">
                     <span class="info-box-text">Litros</span>
-                    <span class="info-box-number">40,110</span>
+                    <span id="litrosVal" class="info-box-number">40,110</span>
                     <!-- The progress section is optional -->
                     <div class="progress">
                         <div class="progress-bar" style="width: 65.8%"></div>

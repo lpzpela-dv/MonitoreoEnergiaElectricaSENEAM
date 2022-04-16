@@ -21,7 +21,7 @@
 @section('content')
 <div id="padd" class="container-fluid">
     <input type="hidden" id="lastValueVolt">
-    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded text">
         <table class="table table-borderless">
             <tbody>
                 <tr>
@@ -32,7 +32,6 @@
             </tbody>
         </table>
     </div>
-    {{-- <div class="row justify-content-center"> --}}
         <div class="row">
             <div class="col-md-6">
                 <canvas id="myChartDiesel" height="110hv"></canvas>
@@ -87,12 +86,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script src="https://kit.fontawesome.com/c5bf36bb97.js" crossorigin="anonymous"></script>
     <script src="js/dgeneral.js"></script>
-    {{-- <script src="js/popper.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
         integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{-- <script src="js/graph.js"></script> --}}
     @endsection

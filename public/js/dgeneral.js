@@ -1,13 +1,19 @@
 $(document).ready(function () {
     let ModalSelectAero = new bootstrap.Modal(document.getElementById('selecAero'));
-    ModalSelectAero.show();
-
+    if ($.cookie('id_aero_selected') == null) {
+        ModalSelectAero.show();
+    } else {
+        getStatusArea();
+        setupDieselGraph();
+        getLogEvents();
+    }
     $('#btnAero').click(function (event) {
-        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 5 })
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
         console.log($.cookie('id_aero_selected'));
         ModalSelectAero.hide();
         getStatusArea();
         setupDieselGraph();
+        getLogEvents();
     });
 
 });
@@ -16,7 +22,7 @@ $(document).ready(function () {
 var myChartDiesel = setupNewGraph('myChartDiesel', 'bar', 'Diesel por Planta');
 
 async function setupDieselGraph() {
-    let res = await fetch('http://192.168.7.110/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let i = 0;
     let litros = [1500, 1000, 1850, 950, 1700];
     let color = ['#ffc107', '#dc3545', '#198754', '#dc3545', '#198754',]
@@ -29,7 +35,7 @@ async function setupDieselGraph() {
     myChartDiesel.update();
 }
 async function getStatusArea() {
-    let resp = await fetch('http://192.168.7.110/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let resp = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let vhtml = '';
     let color = '';
     console.log(resp);
@@ -57,7 +63,7 @@ async function getStatusArea() {
 }
 
 async function getLogEvents() {
-    let res = await fetch('http://192.168.7.110/MonitoreoEnergiaElectricaSENEAM/public/api/alarmas/lst').then(response => response.json());
+    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/alarmas/lst').then(response => response.json());
     console.log(res);
     const tbody = $("#tablebody");
     let rows = '';
@@ -116,7 +122,9 @@ function setupNewGraph(ctx, GType, GText) {
 }
 
 setInterval(() => {
-    console.log("Actualizando data");
-    getLogEvents();
-    getStatusArea();
+    if ($.cookie('id_aero_selected') != null) {
+        console.log("Actualizando data");
+        getLogEvents();
+        getStatusArea();
+    }
 }, 3000);

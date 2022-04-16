@@ -245,34 +245,35 @@ return [
         ],
         [
             'text'    => 'Areas',
+            'key' => 'Areas',
             'icon'    => 'fa-solid fa-map',
-            'submenu' => [
-                [
-                    'text' => 'CCAR1',
-                    'icon'        => 'fa-solid fa-location-dot',
-                    'url'  => 'areas/ccar1',
-                ],
-                [
-                    'text' => 'CCAR2',
-                    'icon'        => 'fa-solid fa-location-dot',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'VOR',
-                    'icon'        => 'fa-solid fa-location-dot',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'RADAR',
-                    'icon'        => 'fa-solid fa-location-dot',
-                    'url'  => '#',
-                ],
-                [
-                    'text' => 'Terrena',
-                    'icon'        => 'fa-solid fa-location-dot',
-                    'url'  => '#',
-                ],
-            ],
+            // 'submenu' => [
+            //     [
+            //         'text' => 'CCAR1',
+            //         'icon'        => 'fa-solid fa-location-dot',
+            //         'url'  => 'areas/ccar1',
+            //     ],
+            //     [
+            //         'text' => 'CCAR2',
+            //         'icon'        => 'fa-solid fa-location-dot',
+            //         'url'  => '#',
+            //     ],
+            //     [
+            //         'text' => 'VOR',
+            //         'icon'        => 'fa-solid fa-location-dot',
+            //         'url'  => '#',
+            //     ],
+            //     [
+            //         'text' => 'RADAR',
+            //         'icon'        => 'fa-solid fa-location-dot',
+            //         'url'  => '#',
+            //     ],
+            //     [
+            //         'text' => 'Terrena',
+            //         'icon'        => 'fa-solid fa-location-dot',
+            //         'url'  => '#',
+            //     ],
+            // ],
         ],
         ['header' => 'Configuración'],
         [

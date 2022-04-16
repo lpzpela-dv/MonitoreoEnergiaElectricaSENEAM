@@ -20,6 +20,12 @@
     }
 </style>
 @endsection
+@section('right-sidebar')
+<p>algo</p>    
+sdfgdfsgsd
+fgsgfsdfgdsf
+dfgsdfg
+@endsection
 @section('content')
 <div id="padd" class="container-fluid">
     <input type="hidden" id="lastValue">

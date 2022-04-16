@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\GeneralController::class, 'index'])->name('general');
-Route::get('/areas/ccar1', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/areas/CCAR1', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/user', [App\Http\Controllers\AuthController::class, 'index'])->name('user');
 Route::post('/user', [App\Http\Controllers\AuthController::class, 'store'])->name('userRegister');
 Route::delete('/user/{user_id}', [App\Http\Controllers\AuthController::class, 'destroy']);

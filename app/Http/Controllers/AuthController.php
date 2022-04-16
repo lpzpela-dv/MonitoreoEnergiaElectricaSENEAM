@@ -40,12 +40,6 @@ class AuthController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $user =  User::create([
@@ -57,13 +51,16 @@ class AuthController extends Controller
 
         return redirect()->route('user');
     }
+    public function destroy($id)
+    {
+        $user = User::where("id", $id)->delete();
+        if ($user == 1) {
+            return response()->json(["status" => "success", "id" => $id, "message" => "Registro Eliminado"]);
+        } else {
+            return response()->json(["status" => "failed", "message" => "No fue posible eliminar el usuario"]);
+        }
+    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::find($id);
@@ -93,19 +90,5 @@ class AuthController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $user = User::where("id", $id)->delete();
-        if ($user == 1) {
-            return response()->json(["status" => "success", "id" => $id, "message" => "Registro Eliminado"]);
-        } else {
-            return response()->json(["status" => "failed", "message" => "No fue posible eliminar el usuario"]);
-        }
-    }
+
 }

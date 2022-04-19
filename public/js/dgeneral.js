@@ -11,28 +11,64 @@ $(document).ready(function () {
         $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
         console.log($.cookie('id_aero_selected'));
         ModalSelectAero.hide();
-        getStatusArea();
-        setupDieselGraph();
-        getLogEvents();
+        location.reload();
+        // getStatusArea();
+        // setupDieselGraph();
+        // getLogEvents();
     });
-
+    $('#changeAero').click(function (e) {
+        ModalSelectAero.show();
+    });
 });
-
 
 var myChartDiesel = setupNewGraph('myChartDiesel', 'bar', 'Diesel por Planta');
 
 async function setupDieselGraph() {
     let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let i = 0;
-    let litros = [1500, 1000, 1850, 950, 1700];
-    let color = ['#ffc107', '#dc3545', '#198754', '#dc3545', '#198754',]
+    let porcent = 0;
+    let color = "";
     res.forEach(value => {
+        porcent = (value.volDiesel * 100) / value.maxDiesel;
+        color = getColorBar(porcent);
         myChartDiesel.data.labels.push(value.areaName);
-        myChartDiesel.data.datasets[0].data.push(litros[i]);
-        myChartDiesel.data.datasets[0].backgroundColor.push(color[i]);
+        myChartDiesel.data.datasets[0].data.push(value.volDiesel);
+        myChartDiesel.data.datasets[0].backgroundColor.push(color);
         i += 1;
     });
     myChartDiesel.update();
+}
+
+async function updateDieselGraph() {
+    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let color = "";
+    //Amarillo ffc107, rojo dc3545, verde 198754
+    let i = 0;
+    let porcent = 0;
+    res.forEach(value => {
+        porcent = (value.volDiesel * 100) / value.maxDiesel;
+        color = getColorBar(porcent);
+        myChartDiesel.data.datasets[0].data[i] = value.volDiesel;
+        myChartDiesel.data.datasets[0].backgroundColor[i] = color;
+        i += 1;
+    });
+    myChartDiesel.update();
+}
+
+function getColorBar(porcentaje) {
+    let color = "";
+    if (porcentaje >= 80) {
+        color = "#198754";
+    } else {
+        if (porcentaje >= 50) {
+            color = "#ffc107";
+        } else {
+            if (porcentaje <= 50) {
+                color = "#dc3545";
+            }
+        }
+    }
+    return color;
 }
 async function getStatusArea() {
     let resp = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
@@ -99,7 +135,9 @@ function setupNewGraph(ctx, GType, GText) {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    grace: 2
+                    grace: 2,
+                    min: 0,
+                    max: 600,
 
                 }
             },
@@ -126,5 +164,6 @@ setInterval(() => {
         console.log("Actualizando data");
         getLogEvents();
         getStatusArea();
+        updateDieselGraph();
     }
 }, 3000);

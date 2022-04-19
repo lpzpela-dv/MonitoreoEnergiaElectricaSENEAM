@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Aeropuerto;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -34,6 +35,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
             if (isset($_COOKIE['id_aero_selected'])) {
                 $aeroID = $_COOKIE['id_aero_selected'];
+                // Obtener el nombre de las areas y mostrar el menú
                 $areas = DB::table('areas_st')->select('id', 'aeropuerto_id', 'areaName')->where('aeropuerto_id', $aeroID)->get();
                 // dd($areas[0]->id);
                 foreach ($areas as $area) {
@@ -46,11 +48,22 @@ class EventServiceProvider extends ServiceProvider
                     ]);
                 }
 
-                // $aeroID = 'prueba';
-                // $event->menu->add([
-                //     'text' => 'Blog',
-                //     'url' => 'admin/blog',
-                // ]);
+                //Obter nombre de aeropuerto y crear el boton
+                $aero = Aeropuerto::all('id', 'shortName', 'description')->where('id', $aeroID);
+                foreach ($aero as $values) {
+                    $event->menu->add([
+                        'text' => $values->shortName,
+                        'key' => 'aeroname',
+                        'icon' => 'fa-solid fa-plane-arrival',
+                    ]);
+                    $event->menu->addIn('aeroname', [
+                        'key' => 'cambiar',
+                        'text' => 'Cambar Aeropuerto',
+                        'icon' => 'fa-solid fa-arrows-rotate',
+                        'url' => '#',
+                        'id' =>'changeAero',
+                    ]);
+                }
             }
         });
     }

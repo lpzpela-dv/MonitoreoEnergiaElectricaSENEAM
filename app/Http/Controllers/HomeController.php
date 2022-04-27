@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aeropuerto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($area_id)
     {
-        return view('dashboardMultiPlantas');
+        $aeropuertos = Aeropuerto::all();
+        return view('dashboardMultiPlantas', compact('aeropuertos'));
     }
 }

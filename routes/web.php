@@ -18,8 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\GeneralController::class, 'index'])->name('general');
-Route::get('/areas/CCAR1', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/areas/{area_id}', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/notifications', [App\Http\Controllers\NotificationsController::class, 'index'])->name('emails');
 Route::get('/user', [App\Http\Controllers\AuthController::class, 'index'])->name('user');
 Route::post('/user', [App\Http\Controllers\AuthController::class, 'store'])->name('userRegister');
+
+Route::post('/notifemails', [App\Http\Controllers\NotificationsController::class, 'update'])->name('emailsRegister');
 Route::delete('/user/{user_id}', [App\Http\Controllers\AuthController::class, 'destroy']);
 Route::get('/user/{user_id}', [App\Http\Controllers\AuthController::class, 'show']);
+
+//Aeropuertos
+Route::get('/aero', [App\Http\Controllers\AeropuertoController::class, 'index'])->name('aeropuertoIndex');
+Route::post('/aero', [App\Http\Controllers\AeropuertoController::class, 'store'])->name('aeroRegister');
+Route::delete('/aero/{aero_id}', [App\Http\Controllers\AeropuertoController::class, 'destroy']);
+Route::put('/aero/{aero_id}', [App\Http\Controllers\AeropuertoController::class, 'update'])->name('aeroEdit');
+Route::get('/aero/{aero_id}', [App\Http\Controllers\AeropuertoController::class, 'show']);

@@ -1,5 +1,23 @@
+var url = "";
+var id = 0;
 $(document).ready(function () {
+    let ModalSelectAero = new bootstrap.Modal(document.getElementById('selecAero'));
+    url = $(location).attr('pathname');
+    id = url.substring(url.lastIndexOf("/") + 1);
+    console.log("Pos:" + id);
     getData();
+
+    $('#btnAero').click(function (event) {
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
+        console.log($.cookie('id_aero_selected'));
+        ModalSelectAero.hide();
+        $(location).attr('pathname', 'MonitoreoEnergiaElectricaSENEAM/public/');
+        // location.reload();
+    });
+    $('#changeAero').click(function (e) {
+        ModalSelectAero.show();
+        return false;
+    });
 });
 
 var myChart = setupNewGraph('myChart', 'line', 'Volts', 'CFE');
@@ -129,7 +147,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
     switch (flag) {
         case 1:
 
-            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
                 Object.values(data).reverse().forEach(values => {
                     // Graficando valores de volts
                     switch (type) {
@@ -184,7 +202,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
 
         default:
             let cont = 0;
-            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/1", function (data) {
+            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
                 Object.values(data).reverse().forEach(values => {
                     cont = cont + 1;
                     myChart.data.labels.push(values.regtime.substring(10));
@@ -269,15 +287,37 @@ function autUpdate(chart = null, type = null, f = null, data = null) {
 }
 
 function setDieselValue(data) {
-    console.log(data);
-    $("#litrosVal").html(data.volDiesel);
+    let porcent = (data.volDiesel * 100) / data.maxDiesel;
+    let color = getColorBar(porcent);
+    $("#litrosVal").html(data.volDiesel + " Litros");
+    $("#porcFecha").html(porcent.toFixed(2) + "% - Hora: " + data.regtime);
+    $('#progressbar').css('width', porcent + "%");
+    $("#colorbg").removeClass("bg-yellow");
+    $("#colorbg").removeClass("bg-green");
+    $("#colorbg").removeClass("bg-red");
+    $("#colorbg").addClass(color);
+}
+function getColorBar(porcentaje) {
+    let color = "";
+    if (porcentaje >= 80) {
+        color = "bg-green";
+    } else {
+        if (porcentaje >= 50) {
+            color = "bg-yellow";
+        } else {
+            if (porcentaje <= 50) {
+                color = "bg-red";
+            }
+        }
+    }
+    return color;
 }
 
 function validandoContactor(data = null) {
     let htmlCFE = "";
     let htmlPlanta = "";
     if (data == null) {
-        $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
+        $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
             data.forEach(values => {
                 if (values.stCFE == 1) {
                     htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
@@ -319,7 +359,7 @@ function validandoContactor(data = null) {
 }
 
 setInterval(() => {
-    $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst", function (data) {
+    $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
         if (data[0].regtime.substring(10) != $("input#lastValue").val()) {
             //Envíar los charts al update data
             autUpdate(myChart, $("#cfeVal").attr('value'), 1, data);
@@ -334,4 +374,5 @@ setInterval(() => {
         setDieselValue(data[0]);
 
     });
+    console.log("Pos:" + id);
 }, 5000);

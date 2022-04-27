@@ -1,7 +1,9 @@
 @extends('adminlte::page')
 @section('css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
-    #padd {
+    <style>#padd {
         padding-top: 15px;
     }
 
@@ -21,7 +23,7 @@
 </style>
 @endsection
 @section('right-sidebar')
-<p>algo</p>    
+<p>algo</p>
 sdfgdfsgsd
 fgsgfsdfgdsf
 dfgsdfg
@@ -33,17 +35,17 @@ dfgsdfg
     <input type="hidden" id="stPlanta">
     <div class="row">
         <div class="col">
-            <div class="info-box bg-yellow">
+            <div id="colorbg" class="info-box">
                 <span class="info-box-icon"><i class="fas fa-hockey-puck"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Litros</span>
+                    {{-- <span class="info-box-text">Litros</span> --}}
                     <span id="litrosVal" class="info-box-number">Cargando...</span>
                     <!-- The progress section is optional -->
                     <div class="progress">
-                        <div class="progress-bar" style="width: 65.8%"></div>
+                        <div class="progress-bar" id="progressbar" style="width: 65.8%"></div>
                     </div>
-                    <span class="progress-description">
-                        70% 17 Enero 13:25
+                    <span id="porcFecha" class="progress-description">
+                        Cargando...
                     </span>
                 </div>
                 <!-- /.info-box-content -->
@@ -56,6 +58,9 @@ dfgsdfg
                         <span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span>
                         <div class="info-box-content">
                             <span class="info-box-text">Contactor CFE</span>
+                            <div class="progress">
+                                {{-- <div class="progress-bar" id="progressbar" style="width: 65.8%"></div> --}}
+                            </div>
                             <span class="info-box-number">ACTIVADO</span>
                         </div>
                     </div>
@@ -122,6 +127,8 @@ dfgsdfg
         </div>
 
     </div>
+    {{-- modal para seleccionar aeropuerto --}}
+    @include('modalAero')
 </div>
 
 @endsection
@@ -130,4 +137,10 @@ dfgsdfg
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 <script src="https://kit.fontawesome.com/c5bf36bb97.js" crossorigin="anonymous"></script>
 <script src="../js/graph.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

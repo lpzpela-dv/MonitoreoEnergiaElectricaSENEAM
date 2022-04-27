@@ -227,11 +227,6 @@ return [
 
     'menu' => [
         // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
@@ -240,50 +235,33 @@ return [
             'text'        => 'Monitoreo',
             'url'         => '/',
             'icon'        => 'fas fa-chart-pie',
-            //'label'       => 4,
-            //'label_color' => 'success',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
         ],
         [
             'text'    => 'Areas',
             'key' => 'Areas',
             'icon'    => 'fa-solid fa-map',
-            // 'submenu' => [
-            //     [
-            //         'text' => 'CCAR1',
-            //         'icon'        => 'fa-solid fa-location-dot',
-            //         'url'  => 'areas/ccar1',
-            //     ],
-            //     [
-            //         'text' => 'CCAR2',
-            //         'icon'        => 'fa-solid fa-location-dot',
-            //         'url'  => '#',
-            //     ],
-            //     [
-            //         'text' => 'VOR',
-            //         'icon'        => 'fa-solid fa-location-dot',
-            //         'url'  => '#',
-            //     ],
-            //     [
-            //         'text' => 'RADAR',
-            //         'icon'        => 'fa-solid fa-location-dot',
-            //         'url'  => '#',
-            //     ],
-            //     [
-            //         'text' => 'Terrena',
-            //         'icon'        => 'fa-solid fa-location-dot',
-            //         'url'  => '#',
-            //     ],
-            // ],
         ],
-        ['header' => 'Configuración'],
+        ['header' => 'Gestión'],
         [
             'text' => 'Usuarios',
             'url'  => 'user',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Alarmas',
-            'url'  => 'admin/settings',
+            'text' => 'Aeropuertos',
+            'url'  => 'aero',
+            'icon' => 'fa-solid fa-plane-departure',
+        ],
+        [
+            'text' => 'Areas',
+            'url'  => 'areas',
+            'icon' => 'fa-solid fa-map-location-dot',
+        ],
+        [
+            'text' => 'Notificaciones',
+            'url'  => 'notifications',
             'icon' => 'fas fa-bell',
         ],
         ['header' => 'Aeropuerto'],

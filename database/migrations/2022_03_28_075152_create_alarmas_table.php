@@ -16,7 +16,7 @@ class CreateAlarmasTable extends Migration
         Schema::create('alarmas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('area_id');
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->string('alarma', 300);
             $table->float('VoltL1', 10, 4);
             $table->float('VoltL2', 10, 4);

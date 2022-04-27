@@ -44,7 +44,7 @@ class EventServiceProvider extends ServiceProvider
                         'key' => $area->areaName,
                         'text' => $area->areaName,
                         'icon' => 'fa-solid fa-location-dot',
-                        'url' => 'areas/' . $area->areaName,
+                        'url' => 'areas/' . $area->id,
                     ]);
                 }
 
@@ -52,7 +52,7 @@ class EventServiceProvider extends ServiceProvider
                 $aero = Aeropuerto::all('id', 'shortName', 'description')->where('id', $aeroID);
                 foreach ($aero as $values) {
                     $event->menu->add([
-                        'text' => $values->shortName,
+                        'text' => $values->description,
                         'key' => 'aeroname',
                         'icon' => 'fa-solid fa-plane-arrival',
                     ]);
@@ -61,7 +61,7 @@ class EventServiceProvider extends ServiceProvider
                         'text' => 'Cambar Aeropuerto',
                         'icon' => 'fa-solid fa-arrows-rotate',
                         'url' => '#',
-                        'id' =>'changeAero',
+                        'id' => 'changeAero',
                     ]);
                 }
             }

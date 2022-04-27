@@ -33,7 +33,8 @@ Route::get('status/area/lst/{id}', [ApirestController::class, 'getAreaStatus']);
 //Obtener losultimos 15 de area
 Route::get('energy/data/hst/{id}', [ApirestController::class, 'gethst']);
 //Obtener el ultimo registro
-Route::get('energy/data/lst', [ApirestController::class, 'getLst']);
+Route::get('energy/data/lst/{area_id}', [ApirestController::class, 'getLst']);
+Route::get('notif/{notif_id}', [ApirestController::class, 'getNofitEmails']);
 //Envíar notificaciónes por correo
 Route::get('/notifications/{alertId}/{type}', [NotificationsController::class, 'sendAlert']);
 

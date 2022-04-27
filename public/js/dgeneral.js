@@ -24,7 +24,7 @@ $(document).ready(function () {
 var myChartDiesel = setupNewGraph('myChartDiesel', 'bar', 'Diesel por Planta');
 
 async function setupDieselGraph() {
-    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let i = 0;
     let porcent = 0;
     let color = "";
@@ -40,7 +40,7 @@ async function setupDieselGraph() {
 }
 
 async function updateDieselGraph() {
-    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let color = "";
     //Amarillo ffc107, rojo dc3545, verde 198754
     let i = 0;
@@ -71,7 +71,7 @@ function getColorBar(porcentaje) {
     return color;
 }
 async function getStatusArea() {
-    let resp = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
+    let resp = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/status/area/lst/' + $.cookie('id_aero_selected')).then(response => response.json());
     let vhtml = '';
     let color = '';
     console.log(resp);
@@ -99,7 +99,7 @@ async function getStatusArea() {
 }
 
 async function getLogEvents() {
-    let res = await fetch('http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/alarmas/lst').then(response => response.json());
+    let res = await fetch('http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/alarmas/lst').then(response => response.json());
     console.log(res);
     const tbody = $("#tablebody");
     let rows = '';

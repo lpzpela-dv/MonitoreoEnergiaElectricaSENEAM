@@ -147,7 +147,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
     switch (flag) {
         case 1:
 
-            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
+            $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
                 Object.values(data).reverse().forEach(values => {
                     // Graficando valores de volts
                     switch (type) {
@@ -202,7 +202,7 @@ function getData(flag = null, chart = null, type = null, f = null) {
 
         default:
             let cont = 0;
-            $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
+            $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/hst/" + id, function (data) {
                 Object.values(data).reverse().forEach(values => {
                     cont = cont + 1;
                     myChart.data.labels.push(values.regtime.substring(10));
@@ -317,7 +317,7 @@ function validandoContactor(data = null) {
     let htmlCFE = "";
     let htmlPlanta = "";
     if (data == null) {
-        $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
+        $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
             data.forEach(values => {
                 if (values.stCFE == 1) {
                     htmlCFE = '<div class="info-box bg-success"><span class="info-box-icon"><i class="fa-solid fa-shuffle"></i></span><div class="info-box-content"><span class="info-box-text">Contactor CFE</span><span class="info-box-number">ACTIVADO</span></div></div>';
@@ -359,7 +359,7 @@ function validandoContactor(data = null) {
 }
 
 setInterval(() => {
-    $.get("http://192.168.56.1/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
+    $.get("http://localhost/MonitoreoEnergiaElectricaSENEAM/public/api/energy/data/lst/" + id, function (data) {
         if (data[0].regtime.substring(10) != $("input#lastValue").val()) {
             //Envíar los charts al update data
             autUpdate(myChart, $("#cfeVal").attr('value'), 1, data);

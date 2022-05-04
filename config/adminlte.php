@@ -252,12 +252,8 @@ return [
         [
             'text' => 'Aeropuertos',
             'url'  => 'aero',
+            'key' => 'btnaero',
             'icon' => 'fa-solid fa-plane-departure',
-        ],
-        [
-            'text' => 'Areas',
-            'url'  => 'areas',
-            'icon' => 'fa-solid fa-map-location-dot',
         ],
         [
             'text' => 'Notificaciones',

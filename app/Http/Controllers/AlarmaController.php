@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class AlarmaController extends Controller
 {
+
     public function getViewAlarma()
     {
         $alarmas = DB::table('alarmasview')->get();

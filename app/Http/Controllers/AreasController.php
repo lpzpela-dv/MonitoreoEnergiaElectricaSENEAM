@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aeropuerto;
 use Illuminate\Http\Request;
 use App\Models\Area;
 
@@ -12,10 +13,15 @@ class AreasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct()
     {
-        $areas = Area::find(1)->plantas;
-        return \response($areas);
+        $this->middleware('auth');
+    }
+    public function index($aero_id)
+    {
+        $aeropuertos  = Aeropuerto::all();
+        $areas = Area::all()->where('aeropuerto_id', $aero_id);
+        return view('area', compact('areas', 'aeropuertos'));
     }
 
     /**
@@ -26,7 +32,13 @@ class AreasController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // return $request;
+        $area =  Area::create([
+            'aeropuerto_id' => $request['aeropuerto_id'],
+            'areaName' => $request['areaName'],
+            'maxDiesel' => $request['maxDiesel'],
+        ]);
+        return redirect()->route('areasIndex', $request['aeropuerto_id']);
     }
 
     /**
@@ -37,7 +49,8 @@ class AreasController extends Controller
      */
     public function show($id)
     {
-        //
+        $area = Area::find($id);
+        return $area;
     }
 
     /**
@@ -49,7 +62,11 @@ class AreasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $area = Area::find($id);
+        $area->areaName = $request['areaName'];
+        $area->maxDiesel = $request['maxDiesel'];
+        $area->save();
+        return response()->json(["status" => "success", "id" => $id, "message" => "Registro Actualizado"]);
     }
 
     /**
@@ -60,6 +77,11 @@ class AreasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $area = Area::find($id)->delete();
+        if ($area == 1) {
+            return response()->json(["status" => "success", "id" => $id, "message" => "Registro Eliminado"]);
+        } else {
+            return response()->json(["status" => "failed", "message" => "No fue posible eliminar el usuario"]);
+        }
     }
 }

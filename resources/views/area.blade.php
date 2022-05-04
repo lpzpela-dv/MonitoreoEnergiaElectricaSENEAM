@@ -19,35 +19,31 @@
 <div id="padd" class="container-fluid">
     <div class="shadow-lg p-3 mb-5 bg-body rounded text">
         <div class="row-md-6 align-self-end" id="btnAdd">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddUserModal"><i
-                    class="fa-solid fa-user-plus"></i></button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddAreaModal"><i
+                    class="fa-solid fa-plus"></i></button>
         </div>
         <br>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Rol</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre de Área</th>
+                    <th scope="col">Capacidad máxima de planta</th>
                     <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($Users as $user)
-                <tr id="row{{$user['id']}}">
-                    <th>{{$user['name']}}</th>
-                    <td>{{$user['email']}}</td>
+                @foreach ($areas as $area)
+                <tr id="row{{$area['id']}}">
+                    <th>{{$area['id']}}</th>
+                    <td>{{$area['areaName']}}</td>
                     <td>
-                        @if ($user['userRol'] == "1")
-                        Administador
-                        @else
-                        Supervisor
-                        @endif
+                        {{$area['maxDiesel']}}
                     </td>
                     <td>
-                        <button type="button" class="btn btn-outline-secondary" onclick="editUser({{$user['id']}})"><i
+                        <button type="button" class="btn btn-outline-secondary" onclick="editArea({{$area['id']}})"><i
                                 class="fa-solid fa-pen-to-square"></i></button>
-                        <button type="button" class="btn btn-outline-danger" onclick="deleteUser({{$user['id']}})"><i
+                        <button type="button" class="btn btn-outline-danger" onclick="deleteArea({{$area['id']}})"><i
                                 class="fa-solid fa-trash"></i></button>
                     </td>
                 </tr>
@@ -58,17 +54,17 @@
     </div>
 </div>
 {{-- Modal Agregar/Editar usuarios --}}
-@include('modals/usuarios/modalUser')
+@include('/modals/area/modalArea')
 {{-- Modal Agregar/Editar usuarios --}}
-@include('modals/usuarios/modalUserDelete')
-@include('modals/usuarios/modalUserEdit')
+@include('/modals/area/modalAreaDelete')
+@include('/modals/area/modalAreaEdit')
 {{-- modal para seleccionar aeropuerto --}}
 @include('modalAero')
 @endsection
 @section('js')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-<script src="js/guser.js"></script>
+<script src="../js/garea.js"></script>
 <script src="https://kit.fontawesome.com/c5bf36bb97.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">

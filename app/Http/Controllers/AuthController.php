@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aeropuerto;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,8 +21,9 @@ class AuthController extends Controller
 
     public function index()
     {
+        $aeropuertos = Aeropuerto::all();
         $Users = User::All();
-        return view('usuarios', compact('Users'));
+        return view('usuarios', compact('Users', 'aeropuertos'));
     }
 
     public function indexAPI()
@@ -87,8 +89,16 @@ class AuthController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if ($request['tpass'] == 'true') {
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->password = Hash::make($request['password']);
+        } else {
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+        }
+        $user->save();
+        return response()->json(["status" => "success", "id" => $id, "message" => "Registro Actualizado"]);
     }
-
-
 }

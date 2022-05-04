@@ -13,10 +13,14 @@ class AeropuertoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
-        $aeros = Aeropuerto::all();
-        return view('aeropuerto', compact('aeros'));
+        $aeropuertos  = Aeropuerto::all();
+        return view('aeropuerto', compact('aeropuertos'));
     }
 
     /**
@@ -87,12 +91,11 @@ class AeropuertoController extends Controller
      */
     public function update(Request $request, $aeropuerto)
     {
-        dd($request);
         $aero = Aeropuerto::find($aeropuerto);
         $aero->shortName = $request['shortName'];
         $aero->description = $request['description'];
         $aero->save();
-        return redirect()->route('aeropuertoIndex');
+        return response()->json(["status" => "success", "id" => $aeropuerto, "message" => "Registro Actualizado"]);
     }
 
     /**

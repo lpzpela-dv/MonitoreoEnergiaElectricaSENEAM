@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\energyNotifMailable;
+use App\Models\Aeropuerto;
 use App\Models\Alarma;
 use App\Models\NotificationEmail;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class NotificationsController extends Controller
 {
+
     public function sendAlert($alertId, $type)
     {
         //obtener data
@@ -55,8 +57,9 @@ class NotificationsController extends Controller
     public function index()
     {
         $aeroID = $_COOKIE['id_aero_selected'];
+        $aeropuertos = Aeropuerto::all();
         $emails = NotificationEmail::where('aeropuerto_id', $aeroID)->get();
-        return view('notifications', compact('emails'));
+        return view('notifications', compact('emails', 'aeropuertos'));
     }
 
     public function update(Request $request)

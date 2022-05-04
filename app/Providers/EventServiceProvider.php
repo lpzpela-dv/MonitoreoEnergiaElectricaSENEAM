@@ -47,7 +47,12 @@ class EventServiceProvider extends ServiceProvider
                         'url' => 'areas/' . $area->id,
                     ]);
                 }
-
+                //Boton de Area con ID de Aeropuerto
+                $event->menu->addAfter('btnaero', [
+                    'text' => 'Areas',
+                    'url'  => 'gestareas/' . $aeroID,
+                    'icon' => 'fa-solid fa-map-location-dot',
+                ]);
                 //Obter nombre de aeropuerto y crear el boton
                 $aero = Aeropuerto::all('id', 'shortName', 'description')->where('id', $aeroID);
                 foreach ($aero as $values) {

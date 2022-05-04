@@ -3,7 +3,7 @@ $(document).ready(() => {
     var myModal2;
     let ModalSelectAero = new bootstrap.Modal(document.getElementById('selecAero'));
     $('#btnAero').click(function (event) {
-        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1, path: '/MonitoreoEnergiaElectricaSENEAM/public' })
         console.log($.cookie('id_aero_selected'));
         ModalSelectAero.hide();
         $(location).attr('pathname', 'MonitoreoEnergiaElectricaSENEAM/public/');
@@ -15,40 +15,37 @@ $(document).ready(() => {
     });
 });
 
-function deleteAero(aero) {
-    $.get("aero/" + aero, function (data) {
+function deleteArea(area) {
+    $.get("../area/" + area, function (data) {
+        console.log(data);
         $("#textDelet").empty();
-        $("#textDelet").append("Estas seguro de eliminar al aeropuerto " + data.description);
+        $("#textDelet").append("Estas seguro de eliminar al area " + data.areaName);
         $("#btnEliminar").attr('onClick', 'confirmDelete(' + data.id + ')');
-        myModal = new bootstrap.Modal(document.getElementById('aeroDeleteModal'));
+        myModal = new bootstrap.Modal(document.getElementById('areaDeleteModal'));
         myModal.show();
     })
 
 }
 
-function editAero(aero) {
-    $.get("aero/" + aero, function (data) {
-        console.log(data);
-        $("#aeroForm").attr('action', "http://localhost/MonitoreoEnergiaElectricaSENEAM/public/aero/" + data.id);
-        $("#btnconfirm").attr('onclick', "updateAero(" + data.id + ")");
-        $("#edshortName").val(data.shortName);
-        $("#eddesc").val(data.description);
-        myModal2 = new bootstrap.Modal(document.getElementById('editAeroModal'));
+function editArea(area) {
+    $.get("../area/" + area, function (data) {
+        $("#btnconfirm").attr('onclick', "updateArea(" + data.id + ")");
+        $("#edareaName").val(data.areaName);
+        $("#edmaxDiesel").val(data.maxDiesel);
+        myModal2 = new bootstrap.Modal(document.getElementById('editAreaModal'));
         myModal2.show();
     })
-    $("#edshortName").val("");
-    $("#eddesc").val("");
 }
-function updateAero(id) {
-    let shortName = $("#edshortName").val();
-    let description = $("#eddesc").val();
+function updateArea(id) {
+    let areaName = $("#edareaName").val();
+    let maxDiesel = $("#edmaxDiesel").val();
     $.ajax({
-        url: "aero/" + id,
+        url: "../area/" + id,
         method: 'put',
         data: {
             '_token': $('meta[name="csrf-token"]').attr('content'),
-            'shortName': shortName,
-            'description': description
+            'areaName': areaName,
+            'maxDiesel': maxDiesel
         },
         dataType: 'json',
         success: function (res) {
@@ -62,7 +59,7 @@ function updateAero(id) {
 
 function confirmDelete(id) {
     $.ajax({
-        url: "aero/" + id,
+        url: "../area/" + id,
         method: 'delete',
         data: { '_token': $('meta[name="csrf-token"]').attr('content') },
         dataType: 'json',

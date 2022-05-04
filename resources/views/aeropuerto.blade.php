@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($aeros as $aero)
+                @foreach ($aeropuertos as $aero)
                 <tr id="row{{$aero['id']}}">
                     <th>{{$aero['id']}}</th>
                     <td>{{$aero['shortName']}}</td>
@@ -58,6 +58,8 @@
 {{-- Modal Agregar/Editar usuarios --}}
 @include('/modals/aeropuerto/modalAeroDelete')
 @include('/modals/aeropuerto/modalAeroEdit')
+{{-- modal para seleccionar aeropuerto --}}
+@include('modalAero')
 @endsection
 @section('js')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -67,4 +69,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+    integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection

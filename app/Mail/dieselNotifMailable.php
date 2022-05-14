@@ -30,6 +30,6 @@ class dieselNotifMailable extends Mailable
     public function build()
     {
         $data = $this->alertMessage;
-        return $this->view('diesel.prueba', compact('data'));
+        return $this->view('emails.diesel', compact('data'));
     }
 }

@@ -18,10 +18,11 @@ class CreateAlarmasTable extends Migration
             $table->unsignedBigInteger('area_id');
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->string('alarma', 300);
-            $table->float('VoltL1', 10, 4);
-            $table->float('VoltL2', 10, 4);
-            $table->float('VoltL3', 10, 4);
-            $table->float('volDiesel', 10, 4);
+            $table->float('VoltL1', 10, 4)->nullable();
+            $table->float('VoltL2', 10, 4)->nullable();
+            $table->float('VoltL3', 10, 4)->nullable();
+            $table->float('volDiesel', 10, 4)->nullable();
+            $table->float('porDiesel', 10, 4)->nullable();
             $table->dateTime('fechaAlarma');
             $table->timestamps();
         });

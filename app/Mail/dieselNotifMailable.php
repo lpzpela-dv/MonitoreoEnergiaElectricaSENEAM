@@ -17,9 +17,9 @@ class dieselNotifMailable extends Mailable
      *
      * @return void
      */
-    public function __construct($mensaje)
+    public function __construct($data)
     {
-        $this->alertMessage = $mensaje;
+        $this->alertMessage = $data;
     }
 
     /**
@@ -29,6 +29,7 @@ class dieselNotifMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.prueba', compact('alertMessage'));
+        $data = $this->alertMessage;
+        return $this->view('diesel.prueba', compact('data'));
     }
 }

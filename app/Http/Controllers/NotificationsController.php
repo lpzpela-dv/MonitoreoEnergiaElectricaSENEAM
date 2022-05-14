@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\dieselNotifMailable;
 use App\Mail\energyNotifMailable;
+
 use App\Models\Aeropuerto;
 use App\Models\Alarma;
 use App\Models\NotificationEmail;
@@ -31,6 +33,16 @@ class NotificationsController extends Controller
             }
 
             $correo = new energyNotifMailable($data);
+        } else {
+            if ($type == 2) {
+                foreach ($emails as $email) {
+                    if ($email->type == "0") {
+                        $destinatarios = $this->formatEmails($email->emails);
+                    }
+                }
+
+                $correo = new dieselNotifMailable($data);
+            }
         }
         Mail::to($destinatarios)->send($correo);
         for ($i = 0; $i < count($destinatarios); $i++) {

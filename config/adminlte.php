@@ -260,6 +260,17 @@ return [
             'url'  => 'notifications',
             'icon' => 'fas fa-bell',
         ],
+        ['header' => 'Reportes'],
+        [
+            'text' => 'Detallado EE',
+            'url'  => 'report/energy',
+            'icon' => 'fa-solid fa-file-lines',
+        ],
+        [
+            'text' => 'Detallado Combustible',
+            'url'  => 'report/gas',
+            'icon' => 'fa-solid fa-file-lines',
+        ],
         ['header' => 'Aeropuerto'],
     ],
 

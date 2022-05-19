@@ -18,7 +18,7 @@
 @section('content')
 <div id="padd" class="container-fluid">
     <div class="shadow-lg p-3 mb-5 bg-body rounded text">
-        <div class="row-md-6 align-self-end" id="btnAdd">
+        <div class="row-md-6 align-self-end" id="btnAdd" align="right">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddAreaModal"><i
                     class="fa-solid fa-plus"></i></button>
         </div>

@@ -41,3 +41,9 @@ Route::post('/gestareas', [App\Http\Controllers\AreasController::class, 'store']
 Route::get('/area/{area_id}', [App\Http\Controllers\AreasController::class, 'show']);
 Route::delete('/area/{area_id}', [App\Http\Controllers\AreasController::class, 'destroy']);
 Route::put('/area/{area_id}', [App\Http\Controllers\AreasController::class, 'update']);
+
+
+// Reportes
+Route::get('/report/energy', [App\Http\Controllers\reportsController::class, 'getEnergyReportView'])->name('getEnergyReportView');
+Route::post('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData'])->name('filterData');
+Route::get('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData']);

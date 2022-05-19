@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-md-5 offset-sm-2">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="gridCheck1" name="onlyoff">
@@ -91,7 +91,7 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div align="right">
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
                     Filtrar</button>
@@ -136,6 +136,12 @@
             @if ($datos!='')
             {{$datos->links()}}
             @endif
+        </div>
+    </div>
+    @else
+    <div class="shadow-lg p-3 mb-5 bg-body rounded text">
+        <div class="justify-content-center" align="center">
+            <h1 class="display-6">No se encontró información</h1>
         </div>
     </div>
     @endif

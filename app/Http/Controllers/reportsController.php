@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EnergyRecordsExport;
 use App\Models\Aeropuerto;
 use App\Models\Area;
 use App\Models\EnergyRecord;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class reportsController extends Controller
 {
@@ -120,5 +122,11 @@ class reportsController extends Controller
         setcookie('cfechaI', $fechaIF[0]);
         setcookie('cfechaF', $fechaIF[1]);
         return $fechaIF;
+    }
+
+    public function exportDocument(Request $request)
+    {
+        $fecha = $this->formatDate($request['rfecha']);
+        return Excel::download(new EnergyRecordsExport([$this->camposGeneral[$request['fuenteID']][$request['datosID']], $fecha[0], $fecha[1], $request['areaID']]), 'MonitoreoSeneamReport.xlsx');
     }
 }

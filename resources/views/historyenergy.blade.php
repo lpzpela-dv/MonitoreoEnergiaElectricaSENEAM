@@ -21,7 +21,6 @@
 <div id="padd" class="container-fluid">
     <div class="shadow-lg p-3 mb-5 bg-body rounded text" id="filtros">
         <h5>Filtros</h5>
-        {{-- <input type="text" class="form-control" id='datetimepicker1' value="01/01/2018 - 01/15/2018" /> --}}
         <form method="POST" action="{{route('filterData')}}">
             @csrf
             <div class=" row mb-3">
@@ -38,7 +37,7 @@
                 <label for="datetimepicker1" class="col-sm-2 col-form-label">Area</label>
                 <div class="col-sm-10">
                     <div class="input-group mb-3" style='width:500px'>
-                        <select name="areaID" class="form-select" aria-label="Default select example">
+                        <select name="areaID" id="areaID" class="form-select" aria-label="Default select example">
                             @foreach ($areas as $area)
                             @if ($histFilter[0] == $area['id'])
                             <option value="{{$area['id']}}" selected>{{$area['areaName']}}</option>
@@ -54,7 +53,7 @@
                 <label for="datetimepicker1" class="col-sm-2 col-form-label">Fuente de dato</label>
                 <div class="col-sm-10">
                     <div class="input-group mb-3" style='width:500px'>
-                        <select name="fuenteID" class="form-select" aria-label="Default select example">
+                        <select name="fuenteID" id="fuenteID" class="form-select" aria-label="Default select example">
                             @foreach ($fuentes as $fuente)
                             @if ($histFilter[1] == $fuente['id'])
                             <option value="{{$fuente['id']}}" selected>{{$fuente['desc']}}</option>
@@ -70,7 +69,7 @@
                 <label for="datetimepicker1" class="col-sm-2 col-form-label">Tipo de dato</label>
                 <div class="col-sm-10">
                     <div class="input-group mb-3" style='width:500px'>
-                        <select name="datoID" class="form-select" aria-label="Default select example">
+                        <select name="datoID" id="datoID" class="form-select" aria-label="Default select example">
                             @foreach ($tdatos as $dato)
                             @if ($histFilter[2]==$dato['id'])
                             <option value="{{$dato['id']}}" selected>{{$dato['desc']}}</option>
@@ -82,16 +81,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row mb-3">
-                <div class="col-md-5 offset-sm-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck1" name="onlyoff">
-                        <label class="form-check-label" for="gridCheck1">
-                            Mostrar solo status Apagado
-                        </label>
-                    </div>
-                </div>
-            </div> --}}
             <div align="right">
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
                     Filtrar</button>
@@ -102,6 +91,17 @@
     <br>
     @if ($datos!='')
     <div class="shadow-lg p-3 mb-5 bg-body rounded text">
+        <div class="d-flex justify-content-end">
+            <form method="POST" action="{{route('exportDocument')}}">
+                @csrf
+                <input type="hidden" name="rfecha" value="{{$saveDate}}">
+                <input type="hidden" name="areaID" value="{{$histFilter[0]}}">
+                <input type="hidden" name="fuenteID" value="{{$histFilter[1]}}">
+                <input type="hidden" name="datosID" value="{{$histFilter[2]}}">
+                <button type="submit" id="btndownload" class="btn btn-success mb-3"><i
+                        class="fa-solid fa-download"></i>Descargar</button>
+            </form>
+        </div>
         <div class="justify-content-center" align="center">
             <h1 class="display-6">Reporte lecturas de {{$headerTitleD[$histFilter[2]][0]}}
                 {{$headerTitleF[$histFilter[1]][0]}}</h1>

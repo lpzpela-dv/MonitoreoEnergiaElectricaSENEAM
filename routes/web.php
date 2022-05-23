@@ -47,3 +47,6 @@ Route::put('/area/{area_id}', [App\Http\Controllers\AreasController::class, 'upd
 Route::get('/report/energy', [App\Http\Controllers\reportsController::class, 'getEnergyReportView'])->name('getEnergyReportView');
 Route::post('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData'])->name('filterData');
 Route::get('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData']);
+
+Route::post('/report/energy/download', [App\Http\Controllers\reportsController::class, 'exportDocument'])->name('exportDocument');
+Route::get('/report/energy/download', [App\Http\Controllers\reportsController::class, 'exportDocument'])->name('exportDocument');

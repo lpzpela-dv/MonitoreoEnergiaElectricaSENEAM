@@ -7,6 +7,7 @@ use App\Models\Aeropuerto;
 use App\Models\Area;
 use App\Models\EnergyRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class reportsController extends Controller
@@ -103,9 +104,7 @@ class reportsController extends Controller
         } else {
             $histFilter = [$_COOKIE['careaID'], $_COOKIE['cfuenteID'], $_COOKIE['cdatoID']];
         }
-        // return $rFecha;
-        // $datos = EnergyRecord::select('id', 'VoltL1 AS d1', 'VoltL2 AS d2', 'VoltL3 AS d3', 'regtime AS fecha')->whereBetween('regtime', [$rFecha[0], $rFecha[1]])->paginate(20);
-        // return $this->camposGeneral[$request['fuenteID']][$request['datoID']];
+
         if (isset($request['fuenteID'])) {
 
             $datos = EnergyRecord::select($this->camposGeneral[$request['fuenteID']][$request['datoID']])->whereBetween('regtime', [$rFecha[0], $rFecha[1]])->where('area_id', $request['areaID'])->paginate(20);
@@ -127,6 +126,55 @@ class reportsController extends Controller
     public function exportDocument(Request $request)
     {
         $fecha = $this->formatDate($request['rfecha']);
-        return Excel::download(new EnergyRecordsExport([$this->camposGeneral[$request['fuenteID']][$request['datosID']], $fecha[0], $fecha[1], $request['areaID']]), 'MonitoreoSeneamReport.xlsx');
+        if ($request['tipo'] == 1) {
+            return Excel::download(new EnergyRecordsExport([$this->camposGeneral[$request['fuenteID']][$request['datosID']], $fecha[0], $fecha[1], $request['areaID'], $request['tipo']]), 'MonitoreoSeneamReport.xlsx');
+        } else {
+            if ($request['tipo'] == 2) {
+                return Excel::download(new EnergyRecordsExport([$fecha[0], $fecha[1], $request['areaID'], '', $request['tipo']]), 'MonitoreoSeneamReportDiesel.xlsx');
+            }
+        }
+    }
+
+
+    //Diesel
+    public function getDieselReportView()
+    {
+        $aeroID = $_COOKIE['id_aero_selected'];
+        $areas = Area::all()->where('aeropuerto_id', $aeroID);
+        $aeropuertos  = Aeropuerto::all();
+        $saveDate = '';
+        $datos = '';
+        $histarea  = '';
+        return view('historydiesel', compact('aeropuertos', 'datos', 'saveDate', 'areas', 'histarea'));
+        // $result = DB::table('energy_records')->leftJoin('areas', 'energy_records.area_id', '=', 'areas.id')->select('energy_records.id', 'energy_records.volDiesel', 'energy_records.regtime as fecha', 'areas.maxDiesel')->whereBetween('regtime', ['2022-04-04 19:00:00', '2022-04-04 22:42:50'])->where('area_id', 1)->paginate(20);
+        // return $result;
+    }
+
+    public function filterDieselData(Request $request)
+    {
+        $aeroID = $_COOKIE['id_aero_selected'];
+        $areas = Area::all()->where('aeropuerto_id', $aeroID);
+        $aeropuertos  = Aeropuerto::all();
+        $saveDate = '';
+        $histarea = '';
+        if (isset($request['areaID'])) {
+            setcookie('careaID', $request['areaID']);
+            setcookie('csaveDate', $request['dateRange']);
+            $saveDate = $request['dateRange'];
+            $histarea = $request['areaID'];
+            $rFecha = $this->formatDate($request['dateRange']);
+        } else {
+            $saveDate = $_COOKIE['csaveDate'];
+            $histarea = $_COOKIE['careaID'];
+        }
+
+        if (isset($request['areaID'])) {
+            $datos = DB::table('energy_records')->leftJoin('areas', 'energy_records.area_id', '=', 'areas.id')->select('energy_records.id', 'energy_records.volDiesel', 'energy_records.regtime as fecha', 'areas.maxDiesel')->whereBetween('regtime', [$rFecha[0], $rFecha[1]])->where('area_id', $request['areaID'])->paginate(20);
+            return view('historydiesel', compact('aeropuertos', 'datos', 'saveDate', 'areas', 'histarea'));
+            // return $datos;
+        } else {
+            $datos = DB::table('energy_records')->leftJoin('areas', 'energy_records.area_id', '=', 'areas.id')->select('energy_records.id', 'energy_records.volDiesel', 'energy_records.regtime as fecha', 'areas.maxDiesel')->whereBetween('regtime', [$_COOKIE['cfechaI'], $_COOKIE['cfechaF']])->where('area_id', $_COOKIE['careaID'])->paginate(20);
+            return view('historydiesel', compact('aeropuertos', 'datos', 'saveDate', 'areas', 'histarea'));
+        }
     }
 }

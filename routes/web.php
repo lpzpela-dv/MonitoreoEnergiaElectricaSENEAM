@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NotificationsController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,15 @@ Route::get('/report/energy', [App\Http\Controllers\reportsController::class, 'ge
 Route::post('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData'])->name('filterData');
 Route::get('/report/energy/f', [App\Http\Controllers\reportsController::class, 'filterEnergyData']);
 
+//Diesel
+Route::get('/report/diesel', [App\Http\Controllers\reportsController::class, 'getDieselReportView'])->name('getDieselReportView');
+Route::get('/report/diesel/c', function () {
+    // return DB::select("CALL GetDieselReport('2022-04-04 19:00:00','2022-04-04 22:42:50',1)");
+    return DB::table('energy_records')->leftJoin('areas', 'energy_records.area_id', '=', 'areas.id')->select('energy_records.id', 'energy_records.volDiesel', 'energy_records.regtime as fecha', 'energy_records.volDiesel')->whereBetween('regtime', ['2022-04-04 19:00:00','2022-04-04 22:42:50'])->where('area_id', 1)->get();
+});
+Route::post('/report/diesel/f', [App\Http\Controllers\reportsController::class, 'filterDieselData'])->name('filterDieselData');
+Route::get('/report/diesel/f', [App\Http\Controllers\reportsController::class, 'filterDieselData']);
+
+//ExportDAta
 Route::post('/report/energy/download', [App\Http\Controllers\reportsController::class, 'exportDocument'])->name('exportDocument');
-Route::get('/report/energy/download', [App\Http\Controllers\reportsController::class, 'exportDocument'])->name('exportDocument');
+// Route::get('/report/energy/download', [App\Http\Controllers\reportsController::class, 'exportDocument'])->name('exportDocument');

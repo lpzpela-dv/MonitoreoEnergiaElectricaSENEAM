@@ -268,7 +268,7 @@ return [
         ],
         [
             'text' => 'Detallado Combustible',
-            'url'  => 'report/gas',
+            'url'  => 'report/diesel',
             'icon' => 'fa-solid fa-file-lines',
         ],
         ['header' => 'Aeropuerto'],

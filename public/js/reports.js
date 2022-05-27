@@ -6,9 +6,17 @@ $(document).ready(() => {
             format: 'YYYY/MM/DD HH:mm'
         }
     });
-    $("#btndownload").click(() => {
-        // download();
-        // return false;
+    let ModalSelectAero = new bootstrap.Modal(document.getElementById('selecAero'));
+    $('#btnAero').click(function (event) {
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1, path: '/MonitoreoEnergiaElectricaSENEAM/public' })
+        console.log($.cookie('id_aero_selected'));
+        ModalSelectAero.hide();
+        $(location).attr('pathname', 'MonitoreoEnergiaElectricaSENEAM/public/');
+        // location.reload();
+    });
+    $('#changeAero').click(function (e) {
+        ModalSelectAero.show();
+        return false;
     });
 })
 

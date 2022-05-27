@@ -3,7 +3,7 @@ $(document).ready(() => {
     var myModal2;
     let ModalSelectAero = new bootstrap.Modal(document.getElementById('selecAero'));
     $('#btnAero').click(function (event) {
-        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1, path: '/MonitoreoEnergiaElectricaSENEAM/public' })
         console.log($.cookie('id_aero_selected'));
         ModalSelectAero.hide();
         $(location).attr('pathname', 'MonitoreoEnergiaElectricaSENEAM/public/');

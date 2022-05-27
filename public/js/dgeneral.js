@@ -8,7 +8,7 @@ $(document).ready(function () {
         getLogEvents();
     }
     $('#btnAero').click(function (event) {
-        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1 })
+        $.cookie('id_aero_selected', $("#selectAero").val(), { expires: 1, path: '/MonitoreoEnergiaElectricaSENEAM/public' })
         console.log($.cookie('id_aero_selected'));
         ModalSelectAero.hide();
         location.reload();
